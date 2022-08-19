@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
-// import "./database";
+import "./database";
 import "./shared/container";
 import { AppError } from './errors/AppError';
 import { router } from './routes';
@@ -22,4 +22,4 @@ app.use((error: Error, request: Request, response: Response, next: NextFunction)
     })
 })
 
-app.listen(4444, () => console.log("Server is running!"));
+app.listen(3333, () => console.log("Server is running!"));

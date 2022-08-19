@@ -14,13 +14,12 @@ services:
     volumes:
       - pgdata:/data/postgres
 
-
   app:
     build: .
     container_name: chefeniadb
     restart: always
     ports:
-      - 4444:4444
+      - 3333:3333
       - 9229:9229
     volumes:
       - .:/usr/app
