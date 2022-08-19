@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  database:
+    image: postgres
+    container_name: database_chefenia
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=chefeniadb
+      - POSTGRES_PASSWORD=chefenia
+      - POSTGRES_DB=chefeniadb
+    volumes:
+      - pgdata:/data/postgres
+
+
+  app:
+    build: .
+    container_name: chefeniadb
+    restart: always
+    ports:
+      - 4444:4444
+      - 9229:9229
+    volumes:
+      - .:/usr/app
+    links:
+      - database
+    depends_on:
+      - database
+
+volumes:
+  pgdata:
+    driver: local
