@@ -1,5 +1,5 @@
 import { getRepository, Repository } from "typeorm";
-import { GeneralMvps } from "../../entities/GeneralMvp";
+import { GeneralMvps } from "../../entities/GeneralMvps";
 import { IGeneralMvpsRepository } from "../IGeneralMvpsRepository";
 
 

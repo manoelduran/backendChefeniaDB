@@ -1,4 +1,4 @@
-import { GeneralMvps } from "../entities/GeneralMvp";
+import { GeneralMvps } from "../entities/GeneralMvps";
 
 interface IGeneralMvpsRepository {
     findByName(name: string): Promise<GeneralMvps>;

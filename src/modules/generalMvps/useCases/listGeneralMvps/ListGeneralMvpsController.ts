@@ -6,7 +6,7 @@ import { ListGeneralMvpsUseCase } from "./ListGeneralMvpsUseCase";
 class ListGeneralMvpsController {
     async handle(request: Request, response: Response): Promise<Response> {
         const listGeneralMvpsUseCase = container.resolve(ListGeneralMvpsUseCase);
-        const generalMvps = listGeneralMvpsUseCase.execute();
+        const generalMvps = await listGeneralMvpsUseCase.execute();
         return response.status(200).json(generalMvps);
     };
 };

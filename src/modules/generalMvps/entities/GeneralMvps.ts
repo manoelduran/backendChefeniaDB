@@ -23,26 +23,37 @@ class GeneralMvps {
 
     @Column()
     level: number;
+
     @Column()
     neutral: number;
+
     @Column()
     water: number;
+
     @Column()
     earth: number;
+
     @Column()
     fire: number;
+
     @Column()
     wind: number;
+
     @Column()
     poison: number;
+
     @Column()
     holy: number;
+
     @Column()
     dark: number;
+
     @Column()
     ghost: number;
+
     @Column()
     undead: number;
+
     constructor() {
         if (!this.id) {
             this.id = uuidV4();
