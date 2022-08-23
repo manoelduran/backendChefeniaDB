@@ -9,6 +9,27 @@ class GeneralMvpsRepository implements IGeneralMvpsRepository {
     constructor() {
         this.repository = getRepository(GeneralMvps);
     };
+    async create({ image, breed, dark, earth, fire, ghost, holy, level, name, neutral, poison, property, quantity, undead, water, wind }: GeneralMvps): Promise<void> {
+        const generalMvp = this.repository.create({
+            breed,
+            dark,
+            earth,
+            fire,
+            ghost,
+            holy,
+            image,
+            level,
+            name,
+            neutral,
+            poison,
+            property,
+            quantity,
+            undead,
+            water,
+            wind
+        });
+        await this.repository.save(generalMvp);
+    }
     async list(): Promise<GeneralMvps[]> {
         const generalMvps = await this.repository.find();
         return generalMvps;
