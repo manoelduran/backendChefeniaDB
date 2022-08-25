@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { ListGeneralMvpsController } from "../modules/generalMvps/useCases/listGeneralMvps/ListGeneralMvpsController";
 import { CreateMvpsFirstRoomController } from "../modules/MvpsFirstRoom/useCases/createMvpsFirstRoom/CreateMvpsFirstRoomController";
+import { ListMvpsFirstRoomController } from "../modules/MvpsFirstRoom/useCases/listMvpsFirstRoom/ListMvpsFirstRoomController";
 
 
 const mvpsFirstRoomRoutes = Router();
 
 const createMvpsFirstRoomController = new CreateMvpsFirstRoomController();
-const listMvpsFirstRoomController = new ListGeneralMvpsController();
+const listMvpsFirstRoomController = new ListMvpsFirstRoomController();
 
 mvpsFirstRoomRoutes.post("/", createMvpsFirstRoomController.handle);
 
