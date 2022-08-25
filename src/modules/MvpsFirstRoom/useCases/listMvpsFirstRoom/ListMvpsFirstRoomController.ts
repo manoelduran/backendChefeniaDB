@@ -8,7 +8,7 @@ class ListMvpsFirstRoomController {
         const listMvpsFirstRoomUseCase = container.resolve(ListMvpsFirstRoomUseCase);
         const mvpsFirstRoom = await listMvpsFirstRoomUseCase.execute();
         return response.status(200).json(mvpsFirstRoom);
-    }
-}
+    };
+};
 
 export { ListMvpsFirstRoomController };
