@@ -24,4 +24,4 @@ class MvpsFirstRoomRepository implements IMvpsFirstRoomRepository {
     }
 }
 
-export { MvppsFirstRoomRepository };
+export { MvpsFirstRoomRepository };
