@@ -5,6 +5,8 @@ import { MvpsFirstRoomRepository } from '../../modules/MvpsFirstRoom/repositorie
 import { IMvpsFirstRoomRepository } from '../../modules/MvpsFirstRoom/repositories/IMvpsFirstRoomRepository';
 import { MvpsSecondRoomRepository } from '../../modules/MvpsSecondRoom/repositories/implementations/MvpsSecondRoomRepository';
 import { IMvpsSecondRoomRepository } from '../../modules/MvpsSecondRoom/repositories/IMvpsSecondRoomRepository';
+import { MvpsThirdRoomRepository } from '../../modules/MvpsThirdRoom/repositories/implementations/MvpsThirdRoomRepository';
+import { IMvpsThirdRoomRepository } from '../../modules/MvpsThirdRoom/repositories/IMvpsThirdRoomRepository';
 
 
 container.registerSingleton<IGeneralMvpsRepository>(
@@ -20,4 +22,9 @@ container.registerSingleton<IMvpsFirstRoomRepository>(
 container.registerSingleton<IMvpsSecondRoomRepository>(
     "MvpsSecondRoomRepository",
     MvpsSecondRoomRepository
+)
+
+container.registerSingleton<IMvpsThirdRoomRepository>(
+    "MvpsThirdRoomRepository",
+    MvpsThirdRoomRepository
 )
