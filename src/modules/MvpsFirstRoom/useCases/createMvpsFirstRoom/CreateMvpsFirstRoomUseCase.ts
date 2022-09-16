@@ -1,7 +1,6 @@
+import { ICreateMvpsFirstRoomDTO, IMvpsFirstRoomRepository } from "@modules/MvpsFirstRoom/repositories/IMvpsFirstRoomRepository";
+import { AppError } from "@shared/errors/AppError";
 import { inject, injectable } from "tsyringe";
-import { AppError } from "../../../../errors/AppError";
-import { MvpsFirstRoom } from "../../entities/MvpsFirstRoom";
-import { ICreateMvpsFirstRoomDTO, IMvpsFirstRoomRepository } from "../../repositories/IMvpsFirstRoomRepository";
 
 @injectable()
 class CreateMvpsFirstRoomUseCase {

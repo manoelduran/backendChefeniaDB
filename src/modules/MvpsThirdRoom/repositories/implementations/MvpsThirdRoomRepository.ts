@@ -1,6 +1,6 @@
 import { getRepository, Repository } from "typeorm";
-import { MvpsThirdRoom } from "../../entities/MvpsThirdRoom";
-import { ICreateMvpsThirdRoomDTO, IMvpsThirdRoomRepository } from "../IMvpsThirdRoomRepository";
+import { ICreateMvpsThirdRoomDTO, IMvpsThirdRoomRepository } from "@modules/MvpsThirdRoom/repositories/IMvpsThirdRoomRepository";
+import { MvpsThirdRoom } from "@modules/MvpsThirdRoom/entities/MvpsThirdRoom";
 
 
 class MvpsThirdRoomRepository implements IMvpsThirdRoomRepository {

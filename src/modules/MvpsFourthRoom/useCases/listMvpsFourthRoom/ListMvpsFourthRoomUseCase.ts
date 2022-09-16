@@ -1,6 +1,6 @@
+import { MvpsFourthRoom } from "@modules/MvpsFourthRoom/entities/MvpsFourthRoom";
+import { IMvpsFourthRoomRepository } from "@modules/MvpsFourthRoom/repositories/IMvpsFourthRoomRepository";
 import { inject, injectable } from "tsyringe";
-import { MvpsFourthRoom } from "../../entities/MvpsFourthRoom";
-import { IMvpsFourthRoomRepository } from "../../repositories/IMvpsFourthRoomRepository";
 
 @injectable()
 class ListMvpsFourthRoomUseCase {

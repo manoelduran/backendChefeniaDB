@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { CreateGeneralMvpUseCase } from "./CreateGeneralMvpUseCase";
+import { CreateGeneralMvpUseCase } from "@modules/generalMvps/useCases/createGeneralMvp/CreateGeneralMvpUseCase";
 
 class CreateGeneralMvpController {
     async handle(request: Request, response: Response): Promise<Response> {

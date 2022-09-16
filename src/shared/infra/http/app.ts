@@ -1,9 +1,11 @@
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
-import "./database";
-import "./shared/container";
-import { AppError } from './errors/AppError';
+import createConnection from "@shared/infra/typeorm";
+import "@shared/container";
 import { router } from './routes';
+import { AppError } from '@shared/errors/AppError';
+
+createConnection();
 
 const app = express();
 
@@ -22,4 +24,4 @@ app.use((error: Error, request: Request, response: Response, next: NextFunction)
     })
 })
 
-app.listen(3333, () => console.log("Server is running!"));
+export { app };

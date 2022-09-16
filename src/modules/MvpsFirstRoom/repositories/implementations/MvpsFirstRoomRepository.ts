@@ -1,7 +1,6 @@
 import { getRepository, Repository } from "typeorm";
-import { MvpsFirstRoom } from "../../entities/MvpsFirstRoom";
-import { ICreateMvpsFirstRoomDTO, IMvpsFirstRoomRepository } from "../IMvpsFirstRoomRepository";
-
+import {ICreateMvpsFirstRoomDTO, IMvpsFirstRoomRepository} from "@modules/MvpsFirstRoom/repositories/IMvpsFirstRoomRepository";
+import { MvpsFirstRoom } from "@modules/MvpsFirstRoom/entities/MvpsFirstRoom";
 
 class MvpsFirstRoomRepository implements IMvpsFirstRoomRepository {
     private repository: Repository<MvpsFirstRoom>

@@ -1,7 +1,6 @@
 import { getRepository, Repository } from "typeorm";
-import { GeneralMvps } from "../../entities/GeneralMvps";
-import { IGeneralMvpsRepository } from "../IGeneralMvpsRepository";
-
+import {IGeneralMvpsRepository} from "@modules/generalMvps/repositories/IGeneralMvpsRepository";
+import { GeneralMvps } from "@modules/generalMvps/entities/GeneralMvps";
 
 
 class GeneralMvpsRepository implements IGeneralMvpsRepository {

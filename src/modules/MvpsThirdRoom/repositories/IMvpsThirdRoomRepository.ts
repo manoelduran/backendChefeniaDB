@@ -1,4 +1,4 @@
-import { MvpsThirdRoom } from "../entities/MvpsThirdRoom";
+import { MvpsThirdRoom } from "@modules/MvpsThirdRoom/entities/MvpsThirdRoom";
 
 
 

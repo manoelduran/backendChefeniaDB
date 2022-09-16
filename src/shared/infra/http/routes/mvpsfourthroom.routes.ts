@@ -1,6 +1,6 @@
+import { CreateMvpsFourthRoomController } from "@modules/MvpsFourthRoom/useCases/createMvpsFourthRoom/CreateMvpsFourthRoomController";
+import { ListMvpsFourthRoomController } from "@modules/MvpsFourthRoom/useCases/listMvpsFourthRoom/ListMvpsFourthRoomController";
 import { Router } from "express";
-import { CreateMvpsFourthRoomController } from "../modules/MvpsFourthRoom/useCases/createMvpsFourthRoom/CreateMvpsFourthRoomController";
-import { ListMvpsFourthRoomController } from "../modules/MvpsFourthRoom/useCases/listMvpsFourthRoom/ListMvpsFourthRoomController";
 
 const mvpsFourthRoutes = Router();
 

@@ -1,6 +1,6 @@
+import { CreateGeneralMvpController } from '@modules/generalMvps/useCases/createGeneralMvp/CreateGeneralMvpController';
+import { ListGeneralMvpsController } from '@modules/generalMvps/useCases/listGeneralMvps/ListGeneralMvpsController';
 import { Router } from 'express';
-import { CreateGeneralMvpController } from '../modules/generalMvps/useCases/createGeneralMvp/CreateGeneralMvpController';
-import { ListGeneralMvpsController } from '../modules/generalMvps/useCases/listGeneralMvps/ListGeneralMvpsController';
 
 const generalMvpsRoutes = Router();
 

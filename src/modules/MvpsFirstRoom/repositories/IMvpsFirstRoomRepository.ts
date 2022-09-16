@@ -1,4 +1,4 @@
-import { MvpsFirstRoom } from "../entities/MvpsFirstRoom";
+import { MvpsFirstRoom } from '@modules/MvpsFirstRoom/entities/MvpsFirstRoom'
 
 
 export interface ICreateMvpsFirstRoomDTO {

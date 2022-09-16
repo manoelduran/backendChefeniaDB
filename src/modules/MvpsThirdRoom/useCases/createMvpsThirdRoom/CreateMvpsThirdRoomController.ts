@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { CreateMvpsThirdRoomUseCase } from "./CreateMvpsThirdRoomUseCase";
+import { CreateMvpsThirdRoomUseCase } from "@modules/MvpsThirdRoom/useCases/createMvpsThirdRoom/CreateMvpsThirdRoomUseCase";
 
 
 class CreateMvpsThirdRoomController {

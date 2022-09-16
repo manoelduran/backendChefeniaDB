@@ -1,6 +1,6 @@
+import { ICreateMvpsSecondRoomDTO, IMvpsSecondRoomRepository } from "@modules/MvpsSecondRoom/repositories/IMvpsSecondRoomRepository";
+import { AppError } from "@shared/errors/AppError";
 import { inject, injectable } from "tsyringe";
-import { AppError } from "../../../../errors/AppError";
-import { ICreateMvpsSecondRoomDTO, IMvpsSecondRoomRepository } from "../../repositories/IMvpsSecondRoomRepository";
 
 @injectable()
 class CreateMvpsSecondRoomUseCase {

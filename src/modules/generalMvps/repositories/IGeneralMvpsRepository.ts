@@ -1,4 +1,4 @@
-import { GeneralMvps } from "../entities/GeneralMvps";
+import {GeneralMvps} from "@modules/generalMvps/entities/GeneralMvps";
 
 export interface ICreateGeneralMvpsDTO {
     name: string,

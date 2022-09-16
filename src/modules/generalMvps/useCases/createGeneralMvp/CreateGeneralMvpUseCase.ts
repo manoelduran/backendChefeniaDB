@@ -1,6 +1,6 @@
+import { ICreateGeneralMvpsDTO, IGeneralMvpsRepository } from "@modules/generalMvps/repositories/IGeneralMvpsRepository";
+import { AppError } from "@shared/errors/AppError";
 import { inject, injectable } from "tsyringe";
-import { AppError } from "../../../../errors/AppError";
-import { ICreateGeneralMvpsDTO, IGeneralMvpsRepository } from "../../repositories/IGeneralMvpsRepository";
 
 
 @injectable()

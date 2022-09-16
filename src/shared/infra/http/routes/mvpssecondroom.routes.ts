@@ -1,6 +1,6 @@
+import { CreateMvpsSecondRoomController } from "@modules/MvpsSecondRoom/useCases/createMvpsSecondRoom/CreateMvpsSecondRoomController";
+import { ListMvpsSecondRoomController } from "@modules/MvpsSecondRoom/useCases/listMvpsSecondRoom/ListMvpsSecondRoomController";
 import { Router } from "express";
-import { CreateMvpsSecondRoomController } from "../modules/MvpsSecondRoom/useCases/createMvpsSecondRoom/CreateMvpsSecondRoomController";
-import { ListMvpsSecondRoomController } from "../modules/MvpsSecondRoom/useCases/listMvpsSecondRoom/ListMvpsSecondRoomController";
 
 const mvpsSecondRoutes = Router();
 

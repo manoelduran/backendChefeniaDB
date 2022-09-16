@@ -1,5 +1,4 @@
-import { MvpsFourthRoom } from "../entities/MvpsFourthRoom";
-
+import { MvpsFourthRoom } from "@modules/MvpsFourthRoom/entities/MvpsFourthRoom";
 
 export interface ICreateMvpsFourthRoomDTO {
     name: string,

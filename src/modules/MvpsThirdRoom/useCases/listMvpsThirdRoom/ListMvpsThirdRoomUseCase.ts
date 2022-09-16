@@ -1,6 +1,6 @@
+import { MvpsThirdRoom } from "@modules/MvpsThirdRoom/entities/MvpsThirdRoom";
+import { IMvpsThirdRoomRepository } from "@modules/MvpsThirdRoom/repositories/IMvpsThirdRoomRepository";
 import { inject, injectable } from "tsyringe";
-import { MvpsThirdRoom } from "../../entities/MvpsThirdRoom";
-import { IMvpsThirdRoomRepository } from "../../repositories/IMvpsThirdRoomRepository";
 
 
 @injectable()
