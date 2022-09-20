@@ -19,7 +19,7 @@ class CreateUserUseCase {
         };
         const encryptPassword = await hash(password, 8);
        const newUser = await this.usersRepository.create({
-            email, job, name, password: encryptPassword, phone, id
+            email, job, name, password: encryptPassword, phone
         });
         return newUser;
     };
