@@ -1,3 +1,5 @@
+import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/UsersRepository';
+import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
 import { IGeneralMvpsRepository } from '@modules/generalMvps/repositories/IGeneralMvpsRepository';
 import { GeneralMvpsRepository } from '@modules/generalMvps/repositories/implementations/GeneralMvpsRepository';
 import { MvpsFirstRoomRepository } from '@modules/MvpsFirstRoom/repositories/implementations/MvpsFirstRoomRepository';
@@ -33,4 +35,9 @@ container.registerSingleton<IMvpsThirdRoomRepository>(
 container.registerSingleton<IMvpsFourthRoomRepository>(
     "MvpsFourthRoomRepository",
     MvpsFourthRoomRepository
+)
+
+container.registerSingleton<IUsersRepository>(
+    "UsersRepository",
+    UsersRepository
 )

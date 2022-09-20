@@ -26,10 +26,10 @@ class User {
     avatar?: string;
 
     @CreateDateColumn()
-    created_at?: Date;
+    created_at: Date;
 
     @CreateDateColumn()
-    updated_at?: Date;
+    updated_at: Date;
 
     constructor() {
         if(!this.id){
