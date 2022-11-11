@@ -1,3 +1,4 @@
+import { Mvp } from '@modules/mvp/infra/typeorm/entities/Mvp';
 import { IMvpsRepository } from '@modules/mvp/repositories/IMvpsRepository';
 
 
