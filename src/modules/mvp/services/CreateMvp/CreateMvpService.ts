@@ -1,7 +1,10 @@
 
+import { MvpNotFoundException } from "@modules/mvp/domain/exceptions/MvpNotFoundException";
 import { CreateMvpDTO } from "@modules/mvp/dtos/CreateMvpDTO";
 import { Mvp } from "@modules/mvp/infra/typeorm/entities/Mvp";
 import { IMvpsRepository } from "@modules/mvp/repositories/IMvpsRepository";
+import { CreateMvpResponse } from "@modules/mvp/responses/CreateMedicalResponse";
+import { left, right } from "@shared/either";
 import { AppError } from "@shared/errors/AppError";
 import { inject, injectable } from "tsyringe";
 
@@ -12,14 +15,13 @@ class CreateMvpService {
         @inject("MvpsRepository")
         private mvpsRepository: IMvpsRepository
     ) { }
-    async execute({ }: CreateMvpDTO): Promise<Mvp> {
-        const alreadyExists = await this.mvpsRepository.findByName(name);
-        if (alreadyExists) {
-            throw new AppError("This Mvp is already created!");
+    async execute(data: CreateMvpDTO): CreateMvpResponse {
+        const alreadyExists = await this.mvpsRepository.findByName(data.name);
+        if (alreadyExists.isRight()) {
+            return left(new MvpNotFoundException());
         };
-        this.mvpsRepository.create({
-
-        });
+        const newMvp = await this.mvpsRepository.create(data);
+        return right(newMvp);
     };
 };
 
