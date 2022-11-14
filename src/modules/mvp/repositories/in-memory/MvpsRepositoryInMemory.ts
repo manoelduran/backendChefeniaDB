@@ -1,4 +1,5 @@
-import { MvpNotFoundException } from '@modules/mvp/domain/exceptions/MvpNotFoundException';
+import { MvpAlreadyExistsException } from '@modules/mvp/domain/Mvp/MvpAlreadyExistsException';
+import { MvpListNotFoundException } from '@modules/mvp/domain/Mvp/MvpListNotFoundException';
 import { CreateMvpDTO } from '@modules/mvp/dtos/CreateMvpDTO';
 import { Mvp } from '@modules/mvp/infra/typeorm/entities/Mvp';
 import { IMvpsRepository } from '@modules/mvp/repositories/IMvpsRepository';
@@ -12,10 +13,10 @@ class MvpsRepositoryInMemory implements IMvpsRepository {
     constructor() {
         this.mvps = [];
     }
-    async findByName(name: string): Promise<Either<MvpNotFoundException, Mvp>> {
+    async findByName(name: string): Promise<Either<MvpAlreadyExistsException, Mvp>> {
         const mvp = this.mvps.find(mvp => mvp.name === name);
         if (!mvp) {
-            return left(new MvpNotFoundException());
+            return left(new MvpAlreadyExistsException());
         };
         return right(mvp);
     };
@@ -25,10 +26,10 @@ class MvpsRepositoryInMemory implements IMvpsRepository {
         this.mvps.push(newMvp);
         return newMvp;
     }
-    async list(): Promise<Either<MvpNotFoundException, Mvp[]>> {
+    async list(): Promise<Either<MvpListNotFoundException, Mvp[]>> {
         const mvps = this.mvps;
         if (!mvps) {
-            return left(new MvpNotFoundException())
+            return left(new MvpListNotFoundException())
         }
         return right(mvps);
     }

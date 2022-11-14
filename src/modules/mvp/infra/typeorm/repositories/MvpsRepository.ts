@@ -3,7 +3,8 @@ import { Mvp } from "@modules/mvp/infra/typeorm/entities/Mvp";
 import { getRepository, Repository } from "typeorm";
 import { CreateMvpDTO } from "@modules/mvp/dtos/CreateMvpDTO";
 import { Either, left, right } from "@shared/either";
-import { MvpNotFoundException } from "@modules/mvp/domain/exceptions/MvpNotFoundException";
+import { MvpAlreadyExistsException } from "@modules/mvp/domain/Mvp/MvpAlreadyExistsException";
+import { MvpListNotFoundException } from "@modules/mvp/domain/Mvp/MvpListNotFoundException";
 
 
 class MvpsRepository implements IMvpsRepository {
@@ -11,10 +12,10 @@ class MvpsRepository implements IMvpsRepository {
     constructor() {
         this.ormRepository = getRepository(Mvp);
     };
-    async findByName(name: string): Promise<Either<MvpNotFoundException, Mvp>> {
+    async findByName(name: string): Promise<Either<MvpAlreadyExistsException, Mvp>> {
         const mvpOrError = await this.ormRepository.findOne({ name });
         if (!mvpOrError) {
-            return left(new MvpNotFoundException())
+            return left(new MvpAlreadyExistsException())
         };
         return right(mvpOrError);
     };
@@ -22,10 +23,10 @@ class MvpsRepository implements IMvpsRepository {
         const newMvp = this.ormRepository.create(data);
         return newMvp;
     };
-    async list(): Promise<Either<MvpNotFoundException, Mvp[]>> {
+    async list(): Promise<Either<MvpListNotFoundException, Mvp[]>> {
         const listOrError = await this.ormRepository.find();
         if (!listOrError) {
-            return left(new MvpNotFoundException());
+            return left(new MvpListNotFoundException());
         };
         return right(listOrError);
     };
