@@ -25,7 +25,7 @@ class MvpsRepository implements IMvpsRepository {
     };
     async list(): Promise<Either<MvpListNotFoundException, Mvp[]>> {
         const listOrError = await this.ormRepository.find();
-        if (!listOrError) {
+        if (listOrError.length === 0) {
             return left(new MvpListNotFoundException());
         };
         return right(listOrError);
