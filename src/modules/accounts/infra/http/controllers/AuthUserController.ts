@@ -1,6 +1,6 @@
+import { AuthUserUseCase } from "@modules/accounts/services/AuthUser/AuthUserUseCase";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { AuthUserUseCase } from "./AuthUserUseCase";
 
 class AuthUserController {
     async handle(request: Request, response: Response): Promise<Response> {

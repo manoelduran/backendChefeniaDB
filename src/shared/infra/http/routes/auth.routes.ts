@@ -1,4 +1,5 @@
-import { AuthUserController } from '@modules/accounts/useCases/AuthUser/AuthUserController';
+
+import { AuthUserController } from '@modules/accounts/infra/http/controllers/AuthUserController';
 import { Router } from 'express';
 
 const authRoutes = Router();
