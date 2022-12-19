@@ -20,7 +20,7 @@ export interface File {
 export interface HttpRequest {
   body?: any;
   user: User;
-  clientIp: string;
+  clientIp?: string;
   permissions: string[];
   params?: any;
   io: any;

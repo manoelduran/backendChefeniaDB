@@ -7,6 +7,6 @@ const mvpController = new MvpController();
 
 MvpsRoutes.post("/", mvpController.create);
 
-MvpsRoutes.get("/mvps", mvpController.list);
+MvpsRoutes.get("/", mvpController.list);
 
 export { MvpsRoutes };

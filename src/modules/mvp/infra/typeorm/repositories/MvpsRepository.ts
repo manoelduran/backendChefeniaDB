@@ -21,6 +21,7 @@ class MvpsRepository implements IMvpsRepository {
     };
     async create(data: CreateMvpDTO): Promise<Mvp> {
         const newMvp = this.ormRepository.create(data);
+        await this.ormRepository.save(newMvp)
         return newMvp;
     };
     async list(): Promise<Either<MvpListNotFoundException, Mvp[]>> {
