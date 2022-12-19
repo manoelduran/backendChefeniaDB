@@ -6,7 +6,7 @@
    "password": "chefenia",
    "database": "chefeniadb",
    "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],
-   "entities": ["./src/modules/**/entities/*.ts"],
+   "entities": ["./src/modules/**/infra/typeorm/entities/*.ts"],
    "cli": {
       "migrationsDir": "./src/shared/infra/typeorm/migrations"
    }

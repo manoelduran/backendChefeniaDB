@@ -7,6 +7,7 @@ services:
     restart: always
     ports:
       - 5432:5432
+    hostname: 'database'
     environment:
       - POSTGRES_USER=chefeniadb
       - POSTGRES_PASSWORD=chefenia
