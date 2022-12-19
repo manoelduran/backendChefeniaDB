@@ -1,4 +1,4 @@
-import { MapController } from "@modules/map/infra/http/MapController";
+import { MapController } from "@modules/map/infra/http/controllers/MapController";
 import { celebrate, Joi, Segments } from "celebrate";
 import { Router } from "express";
 import { routeAdapter } from "../adapters/routeAdapter";
@@ -16,6 +16,6 @@ mapRoutes.post("/", celebrate({
   routeAdapter(mapController, 'create')
   );
 
-
+  mapRoutes.get("/", routeAdapter(mapController, 'list'))
 
 export { mapRoutes }

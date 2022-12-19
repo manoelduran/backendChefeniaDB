@@ -1,14 +1,15 @@
 import { CreateRoomDTO } from "@modules/room/dtos/CreateRoomDTO";
 import { CreateRoomResponse } from "@modules/room/responses/CreateRoomResponse";
+import { ListRoomsResponse } from "@modules/room/responses/ListRoomsResponse";
 import { CreateRoomService } from "@modules/room/services/CreateRoom/CreateRoomService";
+import { ListRoomsService } from "@modules/room/services/ListRooms/ListRoomsService";
 import { Service } from "@shared/domain/Service";
-import { right } from "@shared/either";
 import { BaseController } from "@shared/infra/http/BaseController";
 import { HttpResponse } from "@shared/infra/http/HttpResponse";
 import { container } from "tsyringe";
 
 
-class MapController extends BaseController {
+class RoomController extends BaseController {
     constructor() {
         super();
     };
@@ -21,7 +22,15 @@ class MapController extends BaseController {
             return this.getError(newRoomOrError.value);
         }
         return this.created(newRoomOrError.value);
+    };
+    async list(): Promise<HttpResponse> {
+        const listRoomService = container.resolve<Service<any, ListRoomsResponse>>(ListRoomsService);
+        const roomsOrError = await listRoomService.execute();
+        if(roomsOrError.isLeft()) {
+            return this.getError(roomsOrError.value)
+        };
+        return this.ok(roomsOrError.value)
     }
-}
+};
 
-export { MapController };
+export { RoomController };

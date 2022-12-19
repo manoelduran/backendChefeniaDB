@@ -28,7 +28,7 @@ class MvpsRepositoryInMemory implements IMvpsRepository {
     }
     async list(): Promise<Either<MvpListNotFoundException, Mvp[]>> {
         const mvps = this.mvps;
-        if (!mvps) {
+        if (mvps.length === 0) {
             return left(new MvpListNotFoundException())
         }
         return right(mvps);

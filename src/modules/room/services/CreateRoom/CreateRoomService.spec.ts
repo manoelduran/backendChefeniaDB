@@ -17,20 +17,17 @@ describe("Create Room", () => {
             name: "Sala 1"
         }
         const createdRoom = await createRoomService.execute(newRoom)
-        console.log('createdRoom', createdRoom)
         expect(createdRoom.value).toHaveProperty("name", "Sala 1")
     })
     it("Should not be able to create a Room that already exists", async () => {
         const newRoom = {
             name: "Sala 1"
         }
-        const createdRoom = await createRoomService.execute(newRoom)
-        console.log('createdRoom', createdRoom)
+        await createRoomService.execute(newRoom)
         const newRoom2 = {
             name: "Sala 1"
         }
         const createdRoom2 = await createRoomService.execute(newRoom2)
-        console.log('createdRoom2', createdRoom2)
         expect(createdRoom2.value).toEqual(new RoomAlreadyExistsException())
     })
 })

@@ -1,4 +1,4 @@
-import { RoomController } from "@modules/room/infra/http/RoomController";
+import { RoomController } from "@modules/room/infra/http/controllers/RoomController";
 import { celebrate, Joi, Segments } from "celebrate";
 import { Router } from "express";
 import { routeAdapter } from "../adapters/routeAdapter";
@@ -16,6 +16,6 @@ roomRoutes.post("/", celebrate({
   routeAdapter(roomController, 'create')
   );
 
-
+roomRoutes.get("/", routeAdapter(roomController, 'list'))
 
 export { roomRoutes }

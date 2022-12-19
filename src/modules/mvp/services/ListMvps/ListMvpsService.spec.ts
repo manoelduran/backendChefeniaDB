@@ -1,4 +1,3 @@
-import { Mvp } from "@modules/mvp/infra/typeorm/entities/Mvp";
 import { MvpsRepositoryInMemory } from "@modules/mvp/repositories/in-memory/MvpsRepositoryInMemory";
 import { ListMvpsService } from '@modules/mvp/services/ListMvps/ListMvpsService';
 import { left, right } from "@shared/either";
@@ -15,6 +14,12 @@ describe('List Mvps', () => {
         createMvpService = new CreateMvpService(mvpsRepositoryInMemory);
         listMvpsService = new ListMvpsService(mvpsRepositoryInMemory);
     });
+    it('Should not be able to list Mvps', async () => {
+        const mvpsOrError = await listMvpsService.execute();
+      
+        expect(mvpsOrError.isRight()).toBe(false)
+    });
+
     it('Should be able to list Mvps', async () => {
         const newMvp = {
             name: 'Novo Mvp',
@@ -61,7 +66,7 @@ describe('List Mvps', () => {
             throw left(mvpsOrError.value)
         }
 
-
-        expect(mvpsOrError.value).toHaveLength(2)
+        console.log('mvpsOrError', mvpsOrError.value)
+        expect(right(mvpsOrError.value).value).toHaveLength(2)
     })
 })

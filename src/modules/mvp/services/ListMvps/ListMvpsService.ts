@@ -1,7 +1,7 @@
 import { MvpListNotFoundException } from "@modules/mvp/domain/Mvp/MvpListNotFoundException";
 import { IMvpsRepository } from "@modules/mvp/repositories/IMvpsRepository";
 import { ListMvpResponse } from "@modules/mvp/responses/ListMvpResponse";
-import { left } from "@shared/either";
+import { left, right } from "@shared/either";
 import { inject, injectable } from "tsyringe";
 
 
@@ -16,7 +16,7 @@ class ListMvpsService {
         if(mvpListOrError.isLeft()) {
             return left(new MvpListNotFoundException())
         }
-        return mvpListOrError;
+        return right(mvpListOrError.value);
     };
 };
 
