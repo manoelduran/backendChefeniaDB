@@ -4,6 +4,7 @@ import { authRoutes } from './auth.routes';
 import { mapRoutes } from './maps.routes';
 import { MvpsRoutes } from './mvps.routes';
 import { roomRoutes } from './rooms.routes';
+import { timerRoutes } from './timer.routes';
 
 
 
@@ -14,5 +15,6 @@ router.use("/users", accountRoutes);
 router.use("/session", authRoutes);
 router.use("/rooms", roomRoutes);
 router.use("/maps", mapRoutes)
+router.use("/timers", timerRoutes)
 
 export { router };
