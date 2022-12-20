@@ -6,6 +6,7 @@ import { MvpAlreadyExistsException } from "../domain/Mvp/MvpAlreadyExistsExcepti
 interface IMvpsRepository {
     create(data: CreateMvpDTO): Promise<Mvp>;
     findByName(name: string): Promise<Either<MvpAlreadyExistsException, Mvp>>;
+    findById(id: string): Promise<Either<MvpAlreadyExistsException, Mvp>>;
     list(): Promise<Either<MvpListNotFoundException, Mvp[]>>;
 };
 

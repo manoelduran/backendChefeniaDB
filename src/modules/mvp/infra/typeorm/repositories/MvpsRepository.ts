@@ -12,6 +12,14 @@ class MvpsRepository implements IMvpsRepository {
     constructor() {
         this.ormRepository = getRepository(Mvp);
     };
+
+    async findById(id: string): Promise<Either<MvpAlreadyExistsException, Mvp>> {
+        const mvpOrError = await this.ormRepository.findOne(id);
+        if (!mvpOrError) {
+            return left(new MvpAlreadyExistsException())
+        };
+        return right(mvpOrError);
+    };
     async findByName(name: string): Promise<Either<MvpAlreadyExistsException, Mvp>> {
         const mvpOrError = await this.ormRepository.findOne({ name });
         if (!mvpOrError) {
