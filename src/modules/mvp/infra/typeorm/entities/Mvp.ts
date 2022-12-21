@@ -1,5 +1,6 @@
 import { v4 as uuidV4 } from 'uuid';
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, OneToOne, PrimaryColumn } from 'typeorm';
+import { Timer } from '@modules/timer/infra/typeorm/entities/Timer';
 
 @Entity("mvps")
 class Mvp {
@@ -8,6 +9,9 @@ class Mvp {
 
     @Column()
     name: string;
+
+    @OneToOne(() => Timer, ({mvp}) => mvp)
+    timer: Timer;
 
     @Column()
     quantity: number;
@@ -26,26 +30,37 @@ class Mvp {
 
     @Column()
     level: number;
+
     @Column()
     neutral: number;
+
     @Column()
     water: number;
+
     @Column()
     earth: number;
+
     @Column()
     fire: number;
+
     @Column()
     wind: number;
+
     @Column()
     poison: number;
+
     @Column()
     holy: number;
+
     @Column()
     dark: number;
+
     @Column()
     ghost: number;
+
     @Column()
     undead: number;
+
     constructor() {
         if (!this.id) {
             this.id = uuidV4();
