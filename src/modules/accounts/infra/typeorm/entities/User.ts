@@ -1,5 +1,6 @@
 import { v4 as uuidV4 } from 'uuid';
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn } from "typeorm";
+import { Timer } from '@modules/timer/infra/typeorm/entities/Timer';
 
 
 @Entity("users")
@@ -9,6 +10,9 @@ class User {
 
     @Column()
     email: string;
+
+    @OneToMany(() => Timer, ({user}) => user)
+    timer: Timer[];
 
     @Column()
     password: string;
@@ -34,6 +38,8 @@ class User {
     constructor() {
         if(!this.id){
             this.id = uuidV4();
+            this.created_at = new Date();
+            this.updated_at = new Date();
         };
     };
 };
