@@ -5,6 +5,7 @@
    "username": "chefeniadb",
    "password": "chefenia",
    "database": "chefeniadb",
+   "synchronize": true,
    "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],
    "entities": ["./src/modules/**/infra/typeorm/entities/*.ts"],
    "cli": {
