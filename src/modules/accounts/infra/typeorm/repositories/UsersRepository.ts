@@ -6,7 +6,6 @@ import { Either, left, right } from "@shared/either";
 import { getRepository, Repository } from "typeorm";
 import { User } from "@modules/accounts/infra/typeorm/entities/User";
 
-
 class UsersRepository implements IUsersRepository {
     private repository: Repository<User>
     constructor() {
@@ -18,17 +17,19 @@ class UsersRepository implements IUsersRepository {
         return newUser;
     };
     async findByEmail(email: string): Promise<Either<UserNotFoundException, User>> {
-        const foundUserOrError = await this.repository.findOne({email});
+        const foundUserOrError = await this.repository.findOne({ where: {email}, relations: ['timers'] });
         if (!foundUserOrError) {
             return left(new UserNotFoundException());
         };
         return right(foundUserOrError);
     };
-    async findById(user_id: string): Promise<Either<UserNotFoundException, User>> {
-        const foundUserOrError = await this.repository.findOne({ where:user_id, relations: ['timers'] });
+    async findById(id: string): Promise<Either<UserNotFoundException, User>> {
+        console.log('user_id', id)
+        const foundUserOrError = await this.repository.findOne({ where: {id}, relations: ['timers'] });
         if (!foundUserOrError) {
             return left(new UserNotFoundException());
         };
+        console.log('foundUserOrError', foundUserOrError)
         return right(foundUserOrError);
     };
     async list(): Promise<Either<UsersNotFoundException, User[]>> {

@@ -15,7 +15,6 @@ class CreateUserService {
     ) { }
     async execute({ email, job, name, password, phone }: CreateUserDTO): CreateUserResponse {
         const userAlreadyExistsOrError = await this.usersRepository.findByEmail(email);
-        console.log('userAlreadyExistsOrError', userAlreadyExistsOrError)
         if (userAlreadyExistsOrError.isRight()) {
             return left(new UserAlreadyExistsException())
         };

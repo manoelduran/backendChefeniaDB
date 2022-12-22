@@ -53,7 +53,7 @@ export class CreateUsers1663352042618 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("usersimport '@modules/accounts/container';")
+        await queryRunner.dropTable("users")
     }
 
 }

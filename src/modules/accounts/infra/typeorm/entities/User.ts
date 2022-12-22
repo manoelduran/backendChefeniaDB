@@ -5,14 +5,14 @@ import { Timer } from '@modules/timer/infra/typeorm/entities/Timer';
 
 @Entity("users")
 class User {
-    @PrimaryColumn()
+    @PrimaryColumn({type: 'uuid'})
     id?: string;
 
     @Column()
     email: string;
 
-    @OneToMany(() => Timer, ({user}) => user)
-    timer: Timer[];
+    @OneToMany(() => Timer, (timer) => timer.user)
+    timers: Timer[];
 
     @Column()
     password: string;
@@ -26,7 +26,7 @@ class User {
     @Column()
     phone: string;
 
-    @Column()
+    @Column({nullable: true})
     avatar?: string;
 
     @CreateDateColumn()
