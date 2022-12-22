@@ -11,9 +11,9 @@ const timerController = new TimerController();
 
 timerRoutes.post("/", celebrate({
     [Segments.BODY]: {
-      name: Joi.string().required(),
-      user_id: Joi.string().required(),
-      mvp_id: Joi.string().required(),
+      time: Joi.number().required(),
+      user_id: Joi.string().uuid().required(),
+      mvp_id: Joi.string().uuid().required(),
     },
   }), 
   routeAdapter(timerController, 'create')

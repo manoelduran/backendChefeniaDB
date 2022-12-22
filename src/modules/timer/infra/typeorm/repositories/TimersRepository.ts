@@ -13,6 +13,7 @@ class TimersRepository implements ITimersRepository {
         this.ormRepository = getRepository(Timer);
     };
     async create(data: CreateTimerDTO): Promise<Timer> {
+        console.log('data', data)
         const newTimer = this.ormRepository.create(data);
         await this.ormRepository.save(newTimer)
         return newTimer;

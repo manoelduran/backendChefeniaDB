@@ -6,26 +6,20 @@ import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToOne, Prim
 @Entity("timers")
 class Timer {
 
-    @PrimaryColumn()
+    @PrimaryColumn({type: 'uuid'})
     id?: string;
-    @Column()
+
+    @Column({type: 'uuid', nullable: false})
     user_id: string;
 
-    @ManyToOne(() => User, (user) => user.id, {
-        eager: true,
-        cascade: true,
-        onDelete: 'CASCADE'
-    })
+    @ManyToOne(() => User, (user) => user.timers)
     @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
     user: User;
 
+    @Column({type: 'uuid', nullable: false})
     mvp_id: string;
 
-    @OneToOne(() => Mvp, (mvp) => mvp.id, {
-        eager: true,
-        cascade: true,
-        onDelete: 'CASCADE'
-    })
+    @OneToOne(() => Mvp, ({timer}) => timer)
     @JoinColumn({name: 'mvp_id', referencedColumnName: 'id'})
     mvp: Mvp;
 

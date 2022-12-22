@@ -12,23 +12,29 @@ class CreateTimerService {
         @inject("TimersRepository")
         private timersRepository: ITimersRepository,
         @inject("UsersRepository")
-        private usersRepossitory: IUsersRepository,
+        private usersRepository: IUsersRepository,
         @inject("MvpsRepository")
         private mvpsRepository: IMvpsRepository,
     ) { }
-    async execute({ user_id, mvp_id }: CreateTimerDTO): CreateTimerResponse {
-
-        const user = await this.usersRepossitory.findById(user_id);
+    async execute({ user_id, mvp_id, time }: CreateTimerDTO): CreateTimerResponse {
+        console.log('time', time, user_id, mvp_id)
 
         const mvpOrError = await this.mvpsRepository.findById(mvp_id);
+        console.log('mvpOrError', mvpOrError.value)
         if (mvpOrError.isLeft()) {
             return left(mvpOrError.value);
         };
+        const userOrError = await this.usersRepository.findById(user_id);
+        console.log('userOrError', userOrError.value)
+        if (userOrError.isLeft()) {
+            return left(userOrError.value);
+        };
+        
 
         const newTimer = await this.timersRepository.create({
             mvp_id: mvpOrError.value.id,
-            time: Number(mvpOrError.value.respawn),
-            user_id: user.id,
+            time: time,
+            user_id: userOrError.value.id,
         });
         return right(newTimer);
     }
