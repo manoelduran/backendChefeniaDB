@@ -3,8 +3,8 @@ import { Mvp } from "@modules/mvp/infra/typeorm/entities/Mvp";
 import { getRepository, Repository } from "typeorm";
 import { CreateMvpDTO } from "@modules/mvp/dtos/CreateMvpDTO";
 import { Either, left, right } from "@shared/either";
-import { MvpAlreadyExistsException } from "@modules/mvp/domain/Mvp/MvpAlreadyExistsException";
 import { MvpListNotFoundException } from "@modules/mvp/domain/Mvp/MvpListNotFoundException";
+import { MvpNotFoundException } from "@modules/mvp/domain/exceptions/MvpNotFoundException";
 
 
 class MvpsRepository implements IMvpsRepository {
@@ -13,17 +13,18 @@ class MvpsRepository implements IMvpsRepository {
         this.ormRepository = getRepository(Mvp);
     };
 
-    async findById(id: string): Promise<Either<MvpAlreadyExistsException, Mvp>> {
-        const mvpOrError = await this.ormRepository.findOne(id);
+    async findById(id: string): Promise<Either<MvpNotFoundException, Mvp>> {
+        console.log('mvp_id', id)
+        const mvpOrError = await this.ormRepository.findOne({where: {id}, relations: ['timer']});
         if (!mvpOrError) {
-            return left(new MvpAlreadyExistsException())
+            return left(new MvpNotFoundException())
         };
         return right(mvpOrError);
     };
-    async findByName(name: string): Promise<Either<MvpAlreadyExistsException, Mvp>> {
-        const mvpOrError = await this.ormRepository.findOne({ name });
+    async findByName(name: string): Promise<Either<MvpNotFoundException, Mvp>> {
+        const mvpOrError = await this.ormRepository.findOne({ where: {name}, relations: ['timer'] });
         if (!mvpOrError) {
-            return left(new MvpAlreadyExistsException())
+            return left(new MvpNotFoundException())
         };
         return right(mvpOrError);
     };

@@ -18,7 +18,7 @@ export class CreateMvp1668176864432 implements MigrationInterface {
                     },
                     {
                         name: "quantity",
-                        type: "int"
+                        type: "integer"
                     },
                     {
                         name: "image",
@@ -39,47 +39,47 @@ export class CreateMvp1668176864432 implements MigrationInterface {
                     },
                     {
                         name: "level",
-                        type: "int"
+                        type: "integer"
                     },
                     {
                         name: "neutral",
-                        type: "int",
+                        type: "integer",
                     },
                     {
                         name: "water",
-                        type: "int",
+                        type: "integer",
                     },
                     {
                         name: "earth",
-                        type: "int",
+                        type: "integer",
                     },
                     {
                         name: "fire",
-                        type: "int",
+                        type: "integer",
                     },
                     {
                         name: "wind",
-                        type: "int",
+                        type: "integer",
                     },
                     {
                         name: "poison",
-                        type: "int",
+                        type: "integer",
                     },
                     {
                         name: "holy",
-                        type: "int",
+                        type: "integer",
                     },
                     {
                         name: "dark",
-                        type: "int",
+                        type: "integer",
                     },
                     {
                         name: "ghost",
-                        type: "int",
+                        type: "integer",
                     },
                     {
                         name: "undead",
-                        type: "int",
+                        type: "integer",
                     },
                 ]
             })
@@ -87,6 +87,7 @@ export class CreateMvp1668176864432 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropTable("mvps");
     }
 
 }

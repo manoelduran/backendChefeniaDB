@@ -4,19 +4,19 @@ import { Timer } from '@modules/timer/infra/typeorm/entities/Timer';
 
 @Entity("mvps")
 class Mvp {
-    @PrimaryColumn()
+    @PrimaryColumn({type: 'uuid'})
     id?: string;
 
     @Column()
     name: string;
 
-    @OneToOne(() => Timer, ({mvp}) => mvp)
+    @OneToOne(() => Timer, (timer) => timer.mvp)
     timer: Timer;
 
     @Column()
     quantity: number;
 
-    @Column()
+    @Column({nullable: true})
     image?: string;
 
     @Column()
