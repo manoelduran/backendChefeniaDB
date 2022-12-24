@@ -1,6 +1,5 @@
 import { MvpsRepositoryInMemory } from "@modules/mvp/repositories/in-memory/MvpsRepositoryInMemory";
 import { ListMvpsService } from '@modules/mvp/services/ListMvps/ListMvpsService';
-import { left, right } from "@shared/either";
 import { CreateMvpService } from "../CreateMvp/CreateMvpService";
 
 
@@ -15,9 +14,9 @@ describe('List Mvps', () => {
         listMvpsService = new ListMvpsService(mvpsRepositoryInMemory);
     });
     it('Should not be able to list Mvps', async () => {
-        const mvpsOrError = await listMvpsService.execute();
-      
-        expect(mvpsOrError.isRight()).toBe(false)
+        const mvps = await listMvpsService.execute();
+
+        expect(mvps).toHaveLength(0);
     });
 
     it('Should be able to list Mvps', async () => {
@@ -61,12 +60,9 @@ describe('List Mvps', () => {
         };
         await createMvpService.execute(newMvp2);
 
-        const mvpsOrError = await listMvpsService.execute();
-        if (mvpsOrError.isLeft()) {
-            throw left(mvpsOrError.value)
-        }
+        const mvps = await listMvpsService.execute();
 
-        console.log('mvpsOrError', mvpsOrError.value)
-        expect(right(mvpsOrError.value).value).toHaveLength(2)
-    })
-})
+        console.log('mvpsOrError', mvps);
+        expect(mvps).toHaveLength(2);
+    });
+});

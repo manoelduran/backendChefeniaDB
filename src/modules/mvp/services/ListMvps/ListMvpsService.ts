@@ -1,7 +1,5 @@
-import { MvpListNotFoundException } from "@modules/mvp/domain/Mvp/MvpListNotFoundException";
 import { IMvpsRepository } from "@modules/mvp/repositories/IMvpsRepository";
 import { ListMvpResponse } from "@modules/mvp/responses/ListMvpResponse";
-import { left, right } from "@shared/either";
 import { inject, injectable } from "tsyringe";
 
 
@@ -10,13 +8,10 @@ class ListMvpsService {
     constructor(
         @inject("MvpsRepository")
         private mvpsRepository: IMvpsRepository
-    ) { }
+    ) { };
     async execute(): ListMvpResponse {
-        const mvpListOrError = await this.mvpsRepository.list();
-        if(mvpListOrError.isLeft()) {
-            return left(new MvpListNotFoundException())
-        }
-        return right(mvpListOrError.value);
+        const mvps = await this.mvpsRepository.list();
+        return mvps;
     };
 };
 
