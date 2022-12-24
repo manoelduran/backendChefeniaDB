@@ -7,7 +7,10 @@ import { IUsersRepository } from "../IUsersRepository";
 
 
 class UsersRepositoryInMemory implements IUsersRepository {
-    users: User[] = [];
+    private users: User[];
+    constructor() {
+        this.users = [];
+    }
     async create({ email, job, name, password, phone, avatar }: CreateUserDTO): Promise<User> {
         const newUser = new User();
         Object.assign(newUser, { email, job, name, password, phone, avatar });

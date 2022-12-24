@@ -3,47 +3,43 @@ import { compare } from 'bcrypt';
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
 import { AppError } from "@shared/errors/AppError";
 import { inject, injectable } from "tsyringe";
+import { AuthUserResponse } from "@modules/accounts/responses/AuthUserResponse";
+import { left, right } from "@shared/either";
 
 interface IRequest {
     email: string;
     password: string;
 };
 
-interface IResponse {
-    token: string;
-    userAlreadyExists: {
-        name: string;
-        email: string;
-    }
-};
+
 @injectable()
 class AuthUserService {
     constructor(
         @inject("UsersRepository")
         private usersRepository: IUsersRepository
     ) { }
-    async execute({ email, password }: IRequest): Promise<IResponse> {
-        const userExists = await this.usersRepository.findByEmail(email);
-        if (!userExists) {
-            throw new AppError("Email ou senha incorreto!")
-        }
-        const comparedPassword = await compare(password, userExists.password);
+    async execute({ email, password }: IRequest): AuthUserResponse {
+        const userExistsOrError = await this.usersRepository.findByEmail(email);
+        if (userExistsOrError.isLeft()) {
+            return left(userExistsOrError.value);
+        };
+        const comparedPassword = await compare(password, userExistsOrError.value.password);
         if (!comparedPassword) {
             throw new AppError("As senhas precisam ser iguais!")
         };
         const token = sign({}, "36b6d549bb4847bb1f77130e04fac0da", {
-            subject: userExists.id,
+            subject: userExistsOrError.value.id,
             expiresIn: "1d"
         })
         console.log('token', token)
-        const tokenReturn: IResponse = {
+        const tokenReturn = {
             token,
             userAlreadyExists: {
-                name: userExists.name,
-                email: userExists.email,
+                name: userExistsOrError.value.name,
+                email: userExistsOrError.value.email,
             }
         }
-        return tokenReturn
+        return right(tokenReturn);
     }
 }
 

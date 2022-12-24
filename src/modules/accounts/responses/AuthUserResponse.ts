@@ -1,13 +1,18 @@
 import { Either } from "@shared/either";
 import { UserAlreadyExistsException } from "@modules/accounts/domain/User/UserAlreadyExistsException";
-import { User } from "@modules/accounts/infra/typeorm/entities/User";
 
-
+export interface IResponse {
+  token: string;
+  userAlreadyExists: {
+      name: string;
+      email: string;
+  }
+};
 
 
 export type AuthUserResponse = Promise<
   Either<
     UserAlreadyExistsException,
-    User
+    IResponse
   >
 >;
