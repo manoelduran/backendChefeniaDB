@@ -24,12 +24,10 @@ class RoomsRepositoryInMemory implements IRoomsRepository {
         this.rooms.push(newRoom);
         return newRoom;
     };
-    async list(): Promise<Either<RoomNotFoundException, Room[]>> {
-        const listOrError = this.rooms;
-        if (listOrError.length === 0) {
-            return left(new RoomNotFoundException());
-        };
-        return right(listOrError);
+    async list(): Promise<Room[]> {
+        const rooms = this.rooms;
+
+        return rooms;
     };
 };
 

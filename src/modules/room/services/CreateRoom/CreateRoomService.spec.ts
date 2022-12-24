@@ -1,5 +1,4 @@
 import { RoomAlreadyExistsException } from "@modules/room/domain/Room/RoomAlreadyExistsException";
-import { Room } from "@modules/room/infra/typeorm/entities/Room";
 import { RoomsRepositoryInMemory } from "@modules/room/repositories/in-memory/RoomsRepositoryInMemory";
 import { CreateRoomService } from "@modules/room/services/CreateRoom/CreateRoomService";
 

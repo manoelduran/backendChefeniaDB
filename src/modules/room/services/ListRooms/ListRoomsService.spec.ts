@@ -1,9 +1,6 @@
 import { RoomsRepositoryInMemory } from "@modules/room/repositories/in-memory/RoomsRepositoryInMemory";
-import { left, right } from "@shared/either";
 import { CreateRoomService } from "@modules/room/services/CreateRoom/CreateRoomService";
 import { ListRoomsService } from "@modules/room/services/ListRooms/ListRoomsService";
-import { RoomsNotFoundException } from "@modules/room/domain/Room/RoomsNotFoundException";
-import { AppError } from "@shared/errors/AppError";
 
 
 let roomsRepositoryInMemory: RoomsRepositoryInMemory;
@@ -18,9 +15,8 @@ describe('List Mvps', () => {
     });
 
     it('Should not be able to list Rooms', async () => {
-        const roomsOrError = await listRoomsService.execute();
-        console.log('roomsOrError', roomsOrError.value)
-        expect(roomsOrError.isRight()).toBe(false)
+        const rooms = await listRoomsService.execute();
+        expect(rooms).toHaveLength(0);
     });
     it('Should be able to list Rooms', async () => {
         const newRoom = {
@@ -32,14 +28,9 @@ describe('List Mvps', () => {
         };
         await createRoomService.execute(newRoom2);
 
-        const roomsOrError = await listRoomsService.execute();
-        if (roomsOrError.isLeft()) {
-            return left(roomsOrError.value)
-        }
+        const rooms = await listRoomsService.execute();
 
-        console.log('roomsOrError', roomsOrError)
-        expect(right(roomsOrError.value).value).toHaveLength(2)
-    })
-
-
-})
+        console.log('roomsOrError', rooms);
+        expect(rooms).toHaveLength(2);
+    });
+});
