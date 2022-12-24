@@ -1,5 +1,4 @@
 import { TimerNotFoundException } from "@modules/timer/domain/exceptions/TimerNotFoundException";
-import { TimersNotFoundException } from "@modules/timer/domain/Timer/TimersNotFoundException";
 import { CreateTimerDTO } from "@modules/timer/dtos/CreateTimerDTO";
 import { ITimersRepository } from "@modules/timer/repositories/ITimersRepository";
 import { Either, left, right } from "@shared/either";
@@ -21,20 +20,21 @@ class TimersRepository implements ITimersRepository {
     async findById(id: string): Promise<Either<TimerNotFoundException, Timer>> {
         const foundTimerOrError = await this.ormRepository.findOne(id);
         if (!foundTimerOrError) {
-            return left(new TimerNotFoundException())
+            return left(new TimerNotFoundException());
         };
         return right(foundTimerOrError);
     };
-    public async findByUserIds(user_ids: string[]): Promise<Timer[]> {
-        const foudTimers = await this.ormRepository.find({where: user_ids});
-        return foudTimers;
-    };
-    async list(): Promise<Either<TimersNotFoundException, Timer[]>> {
-        const timersOrError = await this.ormRepository.find();
-        if (!timersOrError) {
-            return left(new TimersNotFoundException())
+    public async findByUserIds(user_id: string): Promise<Either<TimerNotFoundException, Timer[]>> {
+        const foundTimerOrError = await this.ormRepository.find({ where: user_id });
+        if (!foundTimerOrError) {
+            return left(new TimerNotFoundException());
         };
-        return right(timersOrError);
+        return right(foundTimerOrError);
+    };
+    async list(): Promise<Timer[]> {
+        const timers = await this.ormRepository.find();
+
+        return timers;
     };
 };
 

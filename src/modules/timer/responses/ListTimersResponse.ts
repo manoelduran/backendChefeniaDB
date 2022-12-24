@@ -1,13 +1,6 @@
-import { Either } from "@shared/either";
-import { TimersNotFoundException } from "../domain/Timer/TimersNotFoundException";
-import { Timer } from "../infra/typeorm/entities/Timer";
+import { Timer } from "@modules/timer/infra/typeorm/entities/Timer";
 
 
 
 
-export type ListTimersResponse = Promise<
-    Either<
-        TimersNotFoundException,
-        Timer[]
-    >
->;
+export type ListTimersResponse = Promise<Timer[]>;

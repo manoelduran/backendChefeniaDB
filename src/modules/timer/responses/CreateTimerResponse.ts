@@ -1,7 +1,7 @@
 import { UserNotFoundException } from "@modules/accounts/domain/exceptions/UserNotFoundException";
 import { MvpNotFoundException } from "@modules/mvp/domain/exceptions/MvpNotFoundException";
 import { Either } from "@shared/either";
-import { Timer } from "../infra/typeorm/entities/Timer";
+import { Timer } from "@modules/timer/infra/typeorm/entities/Timer";
 
 
 
