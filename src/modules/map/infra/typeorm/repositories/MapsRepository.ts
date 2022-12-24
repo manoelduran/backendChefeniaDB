@@ -1,7 +1,6 @@
 import { getRepository, Repository } from "typeorm";
-import { Either, left, right,  } from "@shared/either";
-import {Map} from '@modules/map/infra/typeorm/entities/Map';
-import { MapsNotFoundException } from "@modules/map/domain/Map/MapsNotFoundException";
+import { Either, left, right, } from "@shared/either";
+import { Map } from '@modules/map/infra/typeorm/entities/Map';
 import { CreateRoomDTO } from "@modules/room/dtos/CreateRoomDTO";
 import { IMapsRepository } from "@modules/map/repositories/IMapsRepository";
 import { MapNotFoundException } from "@modules/map/domain/exceptions/MapNotFoundException";
@@ -25,12 +24,9 @@ class MapsRepository implements IMapsRepository {
         await this.ormRepository.save(newMap)
         return newMap;
     };
-    async list(): Promise<Either<MapsNotFoundException, Map[]>> {
-        const mapsOrError = await this.ormRepository.find();
-        if (mapsOrError.length === 0) {
-            return left(new MapsNotFoundException());
-        };
-        return right(mapsOrError);
+    async list(): Promise<Map[]> {
+        const maps = await this.ormRepository.find();
+        return maps;
     };
 };
 

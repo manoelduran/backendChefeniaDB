@@ -17,9 +17,8 @@ describe('List Mvps', () => {
     });
 
     it('Should not be able to list Rooms', async () => {
-        const mapsOrError = await listMapsService.execute();
-        console.log('mapsOrError', mapsOrError.value)
-        expect(mapsOrError.isRight()).toBe(false)
+        const maps = await listMapsService.execute();
+        expect(maps).toHaveLength(0)
     });
     it('Should be able to list Rooms', async () => {
         const newMap = {
@@ -31,13 +30,10 @@ describe('List Mvps', () => {
         };
         await createMapService.execute(newMap2);
 
-        const mapsOrError = await listMapsService.execute();
-        if (mapsOrError.isLeft()) {
-            return left(mapsOrError.value)
-        }
+        const maps = await listMapsService.execute();
 
-        console.log('roomsOrError', mapsOrError)
-        expect(right(mapsOrError.value).value).toHaveLength(2)
+        console.log('roomsOrError', maps)
+        expect(maps).toHaveLength(2)
     })
 
 
