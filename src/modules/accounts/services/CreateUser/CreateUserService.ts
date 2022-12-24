@@ -1,4 +1,4 @@
-import { UserAlreadyExistsException } from "@modules/accounts/domain/Map/UserAlreadyExistsException";
+import { UserAlreadyExistsException } from "@modules/accounts/domain/User/UserAlreadyExistsException";
 import { CreateUserDTO } from "@modules/accounts/dtos/CreateUserDTO";
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
 import { CreateUserResponse } from "@modules/accounts/responses/CreateUserResponse";

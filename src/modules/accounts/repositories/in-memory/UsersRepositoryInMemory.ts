@@ -1,5 +1,4 @@
 import { UserNotFoundException } from "@modules/accounts/domain/exceptions/UserNotFoundException";
-import { UsersNotFoundException } from "@modules/accounts/domain/Map/UsersNotFoundException";
 import { CreateUserDTO } from "@modules/accounts/dtos/CreateUserDTO";
 import { User } from "@modules/accounts/infra/typeorm/entities/User";
 import { Either, left, right } from "@shared/either";
@@ -30,12 +29,9 @@ class UsersRepositoryInMemory implements IUsersRepository {
         };
         return right(userOrError);
     }
-    async list(): Promise<Either<UsersNotFoundException, User[]>> {
-        const usersOrError = this.users;
-        if (usersOrError.length === 0) {
-            return left(new UsersNotFoundException());
-        };
-        return right(usersOrError);
+    async list(): Promise<User[]> {
+        const users = this.users;
+        return users;
     }
 
 };

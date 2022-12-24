@@ -1,5 +1,4 @@
 import { UserNotFoundException } from "@modules/accounts/domain/exceptions/UserNotFoundException";
-import { UsersNotFoundException } from "@modules/accounts/domain/Map/UsersNotFoundException";
 import { CreateUserDTO } from "@modules/accounts/dtos/CreateUserDTO";
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
 import { Either, left, right } from "@shared/either";
@@ -17,7 +16,7 @@ class UsersRepository implements IUsersRepository {
         return newUser;
     };
     async findByEmail(email: string): Promise<Either<UserNotFoundException, User>> {
-        const foundUserOrError = await this.repository.findOne({ where: {email}, relations: ['timers'] });
+        const foundUserOrError = await this.repository.findOne({ where: { email }, relations: ['timers'] });
         if (!foundUserOrError) {
             return left(new UserNotFoundException());
         };
@@ -25,19 +24,16 @@ class UsersRepository implements IUsersRepository {
     };
     async findById(id: string): Promise<Either<UserNotFoundException, User>> {
         console.log('user_id', id)
-        const foundUserOrError = await this.repository.findOne({ where: {id}, relations: ['timers'] });
+        const foundUserOrError = await this.repository.findOne({ where: { id }, relations: ['timers'] });
         if (!foundUserOrError) {
             return left(new UserNotFoundException());
         };
         console.log('foundUserOrError', foundUserOrError)
         return right(foundUserOrError);
     };
-    async list(): Promise<Either<UsersNotFoundException, User[]>> {
-        const foundUsersOrError = await this.repository.find();
-        if (!foundUsersOrError) {
-            return left(new UsersNotFoundException());
-        };
-        return right(foundUsersOrError);
+    async list(): Promise<User[]> {
+        const users = await this.repository.find();
+        return users;
     };
 
 };
