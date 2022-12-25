@@ -24,11 +24,8 @@ class TimerController extends BaseController {
     };
     async list(): Promise<HttpResponse> {
         const listTimerService = container.resolve<Service<any, ListTimersResponse>>(ListTimersService);
-        const timersOrError = await listTimerService.execute();
-        if (timersOrError.isLeft()) {
-            return this.getError(timersOrError.value)
-        };
-        return this.ok(timersOrError.value)
+        const timers = await listTimerService.execute();
+        return this.ok(timers);
     }
 };
 
