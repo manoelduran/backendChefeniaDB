@@ -18,19 +18,17 @@ class RoomController extends BaseController {
         const { body } = this.request;
         const createRoomService = container.resolve<Service<CreateRoomDTO, CreateRoomResponse>>(CreateRoomService);
         const newRoomOrError = await createRoomService.execute(body);
-        if(newRoomOrError.isLeft()) {
+        if (newRoomOrError.isLeft()) {
             return this.getError(newRoomOrError.value);
         }
         return this.created(newRoomOrError.value);
     };
     async list(): Promise<HttpResponse> {
         const listRoomService = container.resolve<Service<any, ListRoomsResponse>>(ListRoomsService);
-        const roomsOrError = await listRoomService.execute();
-        if(roomsOrError.isLeft()) {
-            return this.getError(roomsOrError.value)
-        };
-        return this.ok(roomsOrError.value)
-    }
+        const rooms = await listRoomService.execute();
+
+        return this.ok(rooms);
+    };
 };
 
 export { RoomController };
