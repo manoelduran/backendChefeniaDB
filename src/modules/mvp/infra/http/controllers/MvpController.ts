@@ -14,11 +14,8 @@ export class MvpController extends BaseController {
     };
     public async list(): Promise<HttpResponse> {
         const listMvpsService = container.resolve<Service<any, ListMvpResponse>>(ListMvpsService);
-        const mvpListOrError = await listMvpsService.execute();
-        if (mvpListOrError.isLeft()) {
-            return this.getError(mvpListOrError.value);
-        };
-        return this.ok(mvpListOrError.value);
+        const mvps = await listMvpsService.execute();
+        return this.ok(mvps);
     };
 
     public async create(): Promise<HttpResponse> {
