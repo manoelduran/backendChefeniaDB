@@ -23,11 +23,8 @@ class UserController extends BaseController {
     };
     async list(): Promise<HttpResponse> {
         const listUsersService = container.resolve(ListUsersService);
-        const usersOrError = await listUsersService.execute();
-        if (usersOrError.isLeft()) {
-            return this.getError(usersOrError.value);
-        };
-        return this.ok(usersOrError.value);
+        const users = await listUsersService.execute();
+        return this.ok(users);
     };
 };
 
