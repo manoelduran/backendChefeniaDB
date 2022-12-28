@@ -4,3 +4,4 @@ import '@modules/room/container';
 import '@modules/map/container';
 import '@modules/timer/container';
 import '@modules/notification/container';
+import '@modules/roomMvp/container';

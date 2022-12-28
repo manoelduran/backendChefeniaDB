@@ -4,6 +4,7 @@ import { authRoutes } from './auth.routes';
 import { mapRoutes } from './maps.routes';
 import { MvpsRoutes } from './mvps.routes';
 import { notificationRoutes } from './notifications.routes';
+import { roomMvpsRoutes } from './roomMvps.routes';
 import { roomRoutes } from './rooms.routes';
 import { timerRoutes } from './timer.routes';
 
@@ -18,5 +19,6 @@ router.use("/rooms", roomRoutes);
 router.use("/maps", mapRoutes);
 router.use("/timers", timerRoutes);
 router.use('/notifications', notificationRoutes);
+router.use('/roomMvps', roomMvpsRoutes)
 
 export { router };
