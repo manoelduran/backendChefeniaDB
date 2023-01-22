@@ -3,9 +3,7 @@ import { Either, left, right, } from "@shared/either";
 import { IRoomMvpsRepository } from "@modules/roomMvp/repositories/IRoomMvpsRepository";
 import { CreateRoomMvpDTO } from "@modules/roomMvp/dtos/CreateRoomMvpDTO";
 import { RoomMvp } from "@modules/roomMvp/infra/typeorm/entities/RoomMvp";
-import { MvpNotFoundException } from "@modules/mvp/domain/exceptions/MvpNotFoundException";
 import { RoomMvpNotFoundException } from "@modules/roomMvp/domain/exceptions/RoomMvpNotFoundException";
-import { RoomNotFoundException } from "@modules/room/domain/exceptions/RoomNotFoundException";
 
 
 
@@ -14,19 +12,39 @@ class RoomMvpsRepository implements IRoomMvpsRepository {
     constructor() {
         this.ormRepository = getRepository(RoomMvp);
     }
+
     async create(data: CreateRoomMvpDTO): Promise<RoomMvp> {
-        throw new Error("Method not implemented.");
+        const newRoomMvp = this.ormRepository.create(data);
+        await this.ormRepository.save(newRoomMvp)
+        return newRoomMvp;
     }
-    async findByMvpId(id: string): Promise<Either<MvpNotFoundException | RoomMvpNotFoundException, RoomMvp | RoomMvp[]>> {
-        throw new Error("Method not implemented.");
+    async findByRoomMvpId(id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp>> {
+        const roomMvpsOrError = await this.ormRepository.findOne(id);
+        if (!roomMvpsOrError) {
+            return left(new RoomMvpNotFoundException())
+        };
+        return right(roomMvpsOrError);
+
     }
-    async findByRoomId(id: string): Promise<Either<RoomNotFoundException | RoomMvpNotFoundException, RoomMvp[]>> {
-        throw new Error("Method not implemented.");
+    async findByMvpId(mvp_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp | RoomMvp[]>> {
+        const roomMvpsOrError = await this.ormRepository.findOne({ mvp_id });
+        if (!roomMvpsOrError) {
+            return left(new RoomMvpNotFoundException())
+        };
+        return right(roomMvpsOrError);
+
+    }
+    async findByRoomId(room_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp | RoomMvp[]>> {
+        const roomMvpsOrError = await this.ormRepository.findOne({ room_id });
+        if (!roomMvpsOrError) {
+            return left(new RoomMvpNotFoundException())
+        };
+        return right(roomMvpsOrError);
     }
     async list(): Promise<RoomMvp[]> {
-        throw new Error("Method not implemented.");
-    }
-    ;
+        const roomMvps = await this.ormRepository.find();
+        return roomMvps;
+    };
 };
 
 export { RoomMvpsRepository };
