@@ -12,6 +12,13 @@ class RoomsRepository implements IRoomsRepository {
     constructor() {
         this.ormRepository = getRepository(Room);
     };
+    async findById(id: string): Promise<Either<RoomNotFoundException, Room>> {
+        const roomOrError = await this.ormRepository.findOne({ where: { id }});
+        if (!roomOrError) {
+            return left(new RoomNotFoundException())
+        };
+        return right(roomOrError);
+    };
     async findByName(name: string): Promise<Either<RoomNotFoundException, Room>> {
         const roomOrError = await this.ormRepository.findOne({ name });
         if (!roomOrError) {

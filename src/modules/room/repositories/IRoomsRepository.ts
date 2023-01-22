@@ -6,6 +6,7 @@ import { RoomNotFoundException } from "@modules/room/domain/exceptions/RoomNotFo
 interface IRoomsRepository {
     create(data: CreateRoomDTO): Promise<Room>;
     findByName(name: string): Promise<Either<RoomNotFoundException, Room>>;
+    findById(id: string): Promise<Either<RoomNotFoundException, Room>>;
     list(): Promise<Room[]>;
 };
 
