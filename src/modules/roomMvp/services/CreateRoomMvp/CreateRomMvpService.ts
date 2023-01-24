@@ -1,5 +1,6 @@
 import { IMvpsRepository } from "@modules/mvp/repositories/IMvpsRepository";
 import { IRoomsRepository } from "@modules/room/repositories/IRoomsRepository";
+import { RoomMvpAlreadyExistsException } from "@modules/roomMvp/domain/RoomMvp/RoomMvpAlreadyExistsException";
 import { CreateRoomMvpDTO } from "@modules/roomMvp/dtos/CreateRoomMvpDTO";
 import { IRoomMvpsRepository } from "@modules/roomMvp/repositories/IRoomMvpsRepository";
 import { CreateRoomMvpResponse } from "@modules/roomMvp/responses/CreateRoomMvpResponse";
@@ -26,7 +27,11 @@ class CreateRoomMvpService {
         if (roomsAlreadyExistsOrError.isLeft()) {
             return left(roomsAlreadyExistsOrError.value)
         }
-        if (mvpsAlreadyExistsOrError && roomsAlreadyExistsOrError) {
+        const roomMvpAlreadyExists = await this.roomMvpsRepository.findByMvpAndRoomIds(mvp_id, room_id);
+        if (roomMvpAlreadyExists.isRight()) {
+            return left(new RoomMvpAlreadyExistsException())
+        }
+        if (left(roomMvpAlreadyExists.value)) {
             const newRoomMvp = await this.roomMvpsRepository.create({
                 mvp_id,
                 room_id
