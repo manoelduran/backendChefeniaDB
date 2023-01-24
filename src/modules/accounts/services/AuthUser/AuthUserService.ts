@@ -1,5 +1,6 @@
 import { sign } from "jsonwebtoken";
 import { compare } from 'bcrypt';
+import authConfig from '@config/auth';
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
 import { AppError } from "@shared/errors/AppError";
 import { inject, injectable } from "tsyringe";
@@ -20,6 +21,7 @@ class AuthUserService {
     ) { }
     async execute({ email, password }: IRequest): AuthUserResponse {
         const userExistsOrError = await this.usersRepository.findByEmail(email);
+        const { expiresIn, refreshExpiresIn, secret } = authConfig.jwt;
         if (userExistsOrError.isLeft()) {
             return left(userExistsOrError.value);
         };
@@ -27,19 +29,28 @@ class AuthUserService {
         if (!comparedPassword) {
             throw new AppError("As senhas precisam ser iguais!")
         };
-        const token = sign({}, "36b6d549bb4847bb1f77130e04fac0da", {
+        const parsedToken = {
+            type: 'user',
+            owner_id: userExistsOrError.value.id,
+            name: userExistsOrError.value.name,
+            email: userExistsOrError.value.email,
+            job: userExistsOrError.value.job,
+          };
+        const token = sign(parsedToken, secret, {
             subject: userExistsOrError.value.id,
-            expiresIn: "1d"
+            expiresIn
         })
         console.log('token', token)
-        const tokenReturn = {
+        const refreshToken = sign(parsedToken, secret, {
+            subject: userExistsOrError.value.id,
+            expiresIn: refreshExpiresIn,
+          });
+        return right({
+            user: userExistsOrError.value,
+            type: 'user',
             token,
-            userAlreadyExists: {
-                name: userExistsOrError.value.name,
-                email: userExistsOrError.value.email,
-            }
-        }
-        return right(tokenReturn);
+            refreshToken,
+          });
     }
 }
 
