@@ -13,6 +13,13 @@ class RoomMvpsRepositoryInMemory implements IRoomMvpsRepository {
     constructor() {
         this.roomMvps = [];
     }
+    async findByMvpAndRoomIds(mvp_id: string, room_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp>> {
+        const foundRoomMvp = this.roomMvps.find(roomMvp => (roomMvp.mvp_id === mvp_id) && (roomMvp.room_id === room_id))
+        if (!foundRoomMvp) {
+            return left(new RoomMvpNotFoundException())
+        };
+        return right(foundRoomMvp);
+    }
 
     async create(data: CreateRoomMvpDTO): Promise<RoomMvp> {
         const newRoom = new RoomMvp();
@@ -27,15 +34,15 @@ class RoomMvpsRepositoryInMemory implements IRoomMvpsRepository {
         };
         return right(foundRoomMvp);
     }
-    async findByMvpId(mvp_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp | RoomMvp[]>> {
-        const foundRoomMvp = this.roomMvps.filter(roomMvp => roomMvp.mvp_id === mvp_id)
+    async findByMvpId(mvp_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp>> {
+        const foundRoomMvp = this.roomMvps.find(roomMvp => roomMvp.mvp_id === mvp_id)
         if (!foundRoomMvp) {
             return left(new RoomMvpNotFoundException())
         };
         return right(foundRoomMvp);
     };
-    async findByRoomId(room_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp | RoomMvp[]>> {
-        const foundRoomMvp = this.roomMvps.filter(roomMvp => roomMvp.room_id === room_id)
+    async findByRoomId(room_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp>> {
+        const foundRoomMvp = this.roomMvps.find(roomMvp => roomMvp.room_id === room_id)
         if (!foundRoomMvp) {
             return left(new RoomMvpNotFoundException())
         };

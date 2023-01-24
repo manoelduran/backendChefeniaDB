@@ -26,7 +26,20 @@ class RoomMvpsRepository implements IRoomMvpsRepository {
         return right(roomMvpsOrError);
 
     }
-    async findByMvpId(mvp_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp | RoomMvp[]>> {
+    async findByMvpAndRoomIds(mvp_id: string, room_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp>> {
+        const roomMvpsOrError = await this.ormRepository.findOne({
+            where: {
+                mvp_id,
+                room_id
+            }
+        });
+        if (!roomMvpsOrError) {
+            return left(new RoomMvpNotFoundException())
+        };
+        return right(roomMvpsOrError);
+
+    }
+    async findByMvpId(mvp_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp>> {
         const roomMvpsOrError = await this.ormRepository.findOne({ mvp_id });
         if (!roomMvpsOrError) {
             return left(new RoomMvpNotFoundException())
@@ -34,7 +47,7 @@ class RoomMvpsRepository implements IRoomMvpsRepository {
         return right(roomMvpsOrError);
 
     }
-    async findByRoomId(room_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp | RoomMvp[]>> {
+    async findByRoomId(room_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp>> {
         const roomMvpsOrError = await this.ormRepository.findOne({ room_id });
         if (!roomMvpsOrError) {
             return left(new RoomMvpNotFoundException())

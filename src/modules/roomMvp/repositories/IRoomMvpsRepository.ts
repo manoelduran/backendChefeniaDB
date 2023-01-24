@@ -5,9 +5,10 @@ import { RoomMvpNotFoundException } from "@modules/roomMvp/domain/exceptions/Roo
 
 interface IRoomMvpsRepository {
     create(data: CreateRoomMvpDTO): Promise<RoomMvp>;
-    findByMvpId(mvp_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp | RoomMvp[]>>;
+    findByMvpId(mvp_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp>>;
     findByRoomMvpId(id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp>>
-    findByRoomId(room_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp | RoomMvp[]>>;
+    findByMvpAndRoomIds(mvp_id: string, room_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp>>
+    findByRoomId(room_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp>>;
     list(): Promise<RoomMvp[]>;
 };
 
