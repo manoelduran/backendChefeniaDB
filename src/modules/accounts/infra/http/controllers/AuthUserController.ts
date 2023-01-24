@@ -1,16 +1,23 @@
 import { AuthUserService } from "@modules/accounts/services/AuthUser/AuthUserService";
-import { Request, Response } from "express";
+import { BaseController } from "@shared/infra/http/BaseController";
+import { HttpResponse } from "@shared/infra/http/HttpResponse";
 import { container } from "tsyringe";
 
-class AuthUserController {
-    async handle(request: Request, response: Response): Promise<Response> {
-        const { email, password } = request.body;
+class AuthUserController extends BaseController {
+    constructor() {
+        super();
+    };
+    async create(): Promise<HttpResponse> {
+        const { email, password } = this.request.body;
         const authUserUseCase = container.resolve(AuthUserService);
-        const token = await authUserUseCase.execute({
+        const authOrError = await authUserUseCase.execute({
             email,
             password
         })
-        return response.status(200).json(token);
+        if (authOrError.isLeft()) {
+            return this.getError(authOrError.value);
+        }
+        return this.ok(authOrError.value);
     };
 };
 
