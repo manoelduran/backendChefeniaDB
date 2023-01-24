@@ -13,7 +13,6 @@ class MvpsRepository implements IMvpsRepository {
     };
 
     async findById(id: string): Promise<Either<MvpNotFoundException, Mvp>> {
-        console.log('mvp_id', id)
         const mvpOrError = await this.ormRepository.findOne({ where: { id }, relations: ['timer'] });
         if (!mvpOrError) {
             return left(new MvpNotFoundException())
