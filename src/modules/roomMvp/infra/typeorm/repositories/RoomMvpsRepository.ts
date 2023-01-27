@@ -47,8 +47,8 @@ class RoomMvpsRepository implements IRoomMvpsRepository {
         return right(roomMvpsOrError);
 
     }
-    async findByRoomId(room_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp>> {
-        const roomMvpsOrError = await this.ormRepository.findOne({ room_id });
+    async findByRoomId(room_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp[]>> {
+        const roomMvpsOrError = await this.ormRepository.find({ room_id });
         if (!roomMvpsOrError) {
             return left(new RoomMvpNotFoundException())
         };

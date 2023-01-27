@@ -41,8 +41,8 @@ class RoomMvpsRepositoryInMemory implements IRoomMvpsRepository {
         };
         return right(foundRoomMvp);
     };
-    async findByRoomId(room_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp>> {
-        const foundRoomMvp = this.roomMvps.find(roomMvp => roomMvp.room_id === room_id)
+    async findByRoomId(room_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp[]>> {
+        const foundRoomMvp = this.roomMvps.filter(roomMvp => roomMvp.room_id === room_id)
         if (!foundRoomMvp) {
             return left(new RoomMvpNotFoundException())
         };

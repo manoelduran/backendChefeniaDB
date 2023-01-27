@@ -8,7 +8,7 @@ interface IRoomMvpsRepository {
     findByMvpId(mvp_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp>>;
     findByRoomMvpId(id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp>>
     findByMvpAndRoomIds(mvp_id: string, room_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp>>
-    findByRoomId(room_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp>>;
+    findByRoomId(room_id: string): Promise<Either<RoomMvpNotFoundException, RoomMvp[]>>;
     list(): Promise<RoomMvp[]>;
 };
 
