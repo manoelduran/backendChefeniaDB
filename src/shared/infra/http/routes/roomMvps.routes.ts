@@ -19,4 +19,12 @@ roomMvpsRoutes.post("/", celebrate({
 
 roomMvpsRoutes.get("/", routeAdapter(roomMvpController, 'list'))
 
+roomMvpsRoutes.get("/:room_id",
+  celebrate({
+    [Segments.PARAMS]: {
+      room_id: Joi.string().required(),
+    },
+  }),
+  routeAdapter(roomMvpController, 'listByRoomId'))
+
 export { roomMvpsRoutes }

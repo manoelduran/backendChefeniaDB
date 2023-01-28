@@ -1,7 +1,10 @@
 import { CreateRoomMvpDTO } from "@modules/roomMvp/dtos/CreateRoomMvpDTO";
+import { ListRoomMvpByRoomIdDTO } from "@modules/roomMvp/dtos/ListRoomMvpByRoomIdDTO";
 import { CreateRoomMvpResponse } from "@modules/roomMvp/responses/CreateRoomMvpResponse";
+import { ListRoomMvpsByRoomIdResponse } from "@modules/roomMvp/responses/ListRoomMvpsByRoomIdResponse";
 import { ListRoomMvpsResponse } from "@modules/roomMvp/responses/ListRoomMvpsResponse";
 import { CreateRoomMvpService } from "@modules/roomMvp/services/CreateRoomMvp/CreateRomMvpService";
+import { ListMvpsByRoomIdService } from "@modules/roomMvp/services/ListMvpsByRoomId/ListMvpsByRoomIdService";
 import { ListRoomMvpsService } from "@modules/roomMvp/services/ListRoomMvps/ListRoomMvpsService";
 import { Service } from "@shared/domain/Service";
 import { BaseController } from "@shared/infra/http/BaseController";
@@ -28,6 +31,15 @@ class RoomMvpController extends BaseController {
         const roomMvps = await listRoomMvpsService.execute();
 
         return this.ok(roomMvps);
+    };
+    async listByRoomId(): Promise<HttpResponse> {
+        const { room_id } = this.request.body;
+        const listRoomMvpsByRoomId = container.resolve<Service<ListRoomMvpByRoomIdDTO, ListRoomMvpsByRoomIdResponse>>(ListMvpsByRoomIdService);
+        const roomMvpsOrError = await listRoomMvpsByRoomId.execute({ room_id });
+        if (roomMvpsOrError.isLeft()) {
+            return this.getError(roomMvpsOrError.value);
+        }
+        return this.ok(roomMvpsOrError.value);
     };
 };
 
