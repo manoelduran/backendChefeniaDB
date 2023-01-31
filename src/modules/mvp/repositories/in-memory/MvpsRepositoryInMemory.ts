@@ -11,7 +11,10 @@ class MvpsRepositoryInMemory implements IMvpsRepository {
     private mvps: Mvp[];
     constructor() {
         this.mvps = [];
-    };
+    }
+    async save(mvp: Mvp): Promise<Mvp> {
+        return mvp;
+    }
     async findByName(name: string): Promise<Either<MvpNotFoundException, Mvp>> {
         const mvp = this.mvps.find(mvp => mvp.name === name);
         if (!mvp) {

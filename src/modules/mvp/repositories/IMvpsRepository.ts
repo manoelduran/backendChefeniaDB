@@ -7,6 +7,7 @@ interface IMvpsRepository {
     findByName(name: string): Promise<Either<MvpNotFoundException, Mvp>>;
     findById(id: string): Promise<Either<MvpNotFoundException, Mvp>>;
     list(): Promise<Mvp[]> ;
+    save(mvp: Mvp): Promise<Mvp>;
 };
 
 export { IMvpsRepository };

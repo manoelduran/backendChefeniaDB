@@ -10,8 +10,12 @@ class MvpsRepository implements IMvpsRepository {
     private ormRepository: Repository<Mvp>;
     constructor() {
         this.ormRepository = getRepository(Mvp);
-    };
+    }
 
+    async save(mvp: Mvp): Promise<Mvp> {
+        await this.ormRepository.save(mvp);
+        return mvp;
+    }
     async findById(id: string): Promise<Either<MvpNotFoundException, Mvp>> {
         const mvpOrError = await this.ormRepository.findOne({ where: { id }, relations: ['timer'] });
         if (!mvpOrError) {
