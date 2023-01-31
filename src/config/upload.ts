@@ -43,7 +43,6 @@ export default {
             destination: tmpFolder,
             filename(_, file, callback) {
                 const extension = mime.getExtension(file.mimetype);
-
                 function validateExtension(): void {
                     const extensionsEnabled = [
                         'image/jpeg',
@@ -88,7 +87,6 @@ export default {
 
                 function formatFileName(): string {
                     let result = replaceSpecialCharactersWithinString(file.originalname);
-
                     function replaceBlankSpaces(): void {
                         result = result.replace(/\s/g, '-');
                     }
@@ -101,7 +99,6 @@ export default {
 
                     replaceBlankSpaces();
                     replaceExtension();
-
                     return result;
                 }
 
@@ -111,7 +108,6 @@ export default {
                 const originalName = formatFileName();
 
                 const fileName = `${generateFileHash()}-${originalName}`;
-
                 return callback(null, fileName);
             },
         }),
@@ -120,7 +116,7 @@ export default {
         disk: {},
         aws: {
             bucket: process.env.UPLOAD_BUCKET,
-            region: 'us-east-1',
+            region: process.env.AWS_REGION,
             uri: `https://${process.env.UPLOAD_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com`,
             credentials: {
                 accessKeyId: process.env.S3_ACCESS_KEY_ID,
