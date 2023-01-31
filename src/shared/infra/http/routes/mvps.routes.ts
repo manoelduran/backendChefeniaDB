@@ -1,10 +1,14 @@
+import uploadConfig from '@config/upload';
 import { MvpController } from '@modules/mvp/infra/http/controllers/MvpController';
+import { MvpImageController } from '@modules/mvp/infra/http/controllers/MvpImageController';
 import { celebrate, Joi, Segments } from 'celebrate';
 import { Router } from 'express';
+import multer from 'multer';
 import { routeAdapter } from '../adapters/routeAdapter';
 
 const MvpsRoutes = Router();
-
+const upload = multer(uploadConfig.multer);
+const mvpImageController = new MvpImageController()
 const mvpController = new MvpController();
 
 MvpsRoutes.post("/", celebrate({
@@ -29,6 +33,12 @@ MvpsRoutes.post("/", celebrate({
 }),
     routeAdapter(mvpController, 'create'))
 
-MvpsRoutes.get("/",routeAdapter(mvpController, 'list'));
+MvpsRoutes.get("/", routeAdapter(mvpController, 'list'));
+
+MvpsRoutes.patch('/image/:mvp_id', upload.single('file'),  celebrate({
+    [Segments.PARAMS]: {
+      mvp_id: Joi.string().uuid().required(),
+    },
+  }), routeAdapter(mvpImageController, 'update'))
 
 export { MvpsRoutes };

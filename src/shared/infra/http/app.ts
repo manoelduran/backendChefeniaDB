@@ -14,13 +14,11 @@ createConnection();
 const app = express();
 app.use(express.json());
 app.use(router);
-app.use(cors({
-    origin: process.env.APP_API_URL,
-}))
+app.use(cors())
 app.use('/files', express.static(uploadConfig.uploadsFolder));
 app.use((error: Error, request: Request, response: Response, next: NextFunction) => {
     if (error instanceof AppError) {
-        
+
         return response.status(error.statusCode).json({
             message: error.message
         });
