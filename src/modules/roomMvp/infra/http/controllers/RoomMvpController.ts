@@ -33,7 +33,7 @@ class RoomMvpController extends BaseController {
         return this.ok(roomMvps);
     };
     async listByRoomId(): Promise<HttpResponse> {
-        const { room_id } = this.request.body;
+        const { room_id } = this.request.params;
         const listRoomMvpsByRoomId = container.resolve<Service<ListRoomMvpByRoomIdDTO, ListRoomMvpsByRoomIdResponse>>(ListMvpsByRoomIdService);
         const roomMvpsOrError = await listRoomMvpsByRoomId.execute({ room_id });
         if (roomMvpsOrError.isLeft()) {
