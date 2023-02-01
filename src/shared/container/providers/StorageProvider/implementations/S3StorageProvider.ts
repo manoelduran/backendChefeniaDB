@@ -20,6 +20,7 @@ class S3StorageProvider implements IStorageProvider {
     });
   }
   public async save({ file, fileType, fileContent, folderName }: ISaveFileDTO): Promise<string> {
+    console.log('AQUI ESTOU')
     let ContentType = fileType;
     const readFile = () => {
       const originalPath = path.resolve(uploadConfig.tmpFolder, file);

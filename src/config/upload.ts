@@ -136,6 +136,7 @@ export default {
         return driver;
     },
     getMvpImage(mvp_image: string): string {
+        console.log('OLA')
         const drivers = {
             disk: `${process.env.APP_API_URL}/files/${mvp_image}`,
             s3: `${this.config.aws.uri}/${mvp_image}`,
