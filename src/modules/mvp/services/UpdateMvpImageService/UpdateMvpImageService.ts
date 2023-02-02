@@ -3,6 +3,7 @@ import { IMvpsRepository } from "@modules/mvp/repositories/IMvpsRepository";
 import { UpdateMvpImageResponse } from "@modules/mvp/responses/UpdateMvpImageResponse";
 import IStorageProvider from "@shared/container/providers/StorageProvider/models/IStorageProvider";
 import { left, right } from "@shared/either";
+import { classToPlain, instanceToInstance } from "class-transformer";
 import { inject, injectable } from "tsyringe";
 
 
@@ -15,7 +16,7 @@ class UpdateMvpImageService {
         private storageProvider: IStorageProvider
     ) { };
     async execute({ mvp_id, file }: UpdateMvpImageDTO): UpdateMvpImageResponse {
-        console.log('file', file)
+
         const mvpOrError = await this.mvpsRepository.findById(mvp_id)
         if (mvpOrError.isLeft()) {
             return left(mvpOrError.value)
@@ -28,10 +29,10 @@ class UpdateMvpImageService {
             file: file,
             folderName: `mvps/${mvp_id}`
         })
-        console.log('filename', filename)
+ 
         mvpOrError.value.image = filename;
         await this.mvpsRepository.save(mvpOrError.value)
-        return right(mvpOrError.value)
+        return right(instanceToInstance(mvpOrError.value))
     };
 };
 
