@@ -12,7 +12,7 @@ class Timer {
     @Column({type: 'uuid', nullable: false})
     user_id: string;
 
-    @ManyToOne(() => User, (user) => user.timers)
+    @ManyToOne(() => User, ({timers}) => timers)
     @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
     user: User;
 

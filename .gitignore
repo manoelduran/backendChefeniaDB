@@ -1,4 +1,5 @@
 node_modules
 ormconfig.json
+ormconfig.js
 .env
 tmp
