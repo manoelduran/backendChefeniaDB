@@ -24,7 +24,7 @@ class Mvp {
     property: string;
 
     @Column()
-    respawn: string;
+    respawn?: string;
 
     @Column()
     breed: string;

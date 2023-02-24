@@ -4,7 +4,7 @@ export default async (
    host = process.env.AWS_RDS_HOST //"database"//
 ): Promise<Connection> => {
   const defaultOptions = await getConnectionOptions();
-console.log('defaultOptions', defaultOptions)
+
   return createConnection(
     Object.assign(defaultOptions, {
       host: host,

@@ -3,7 +3,7 @@ interface CreateMvpDTO {
     quantity: number;
     image?: string;
     property: string;
-    respawn: string;
+    respawn?: string;
     breed: string;
     level: number;
     neutral: number;
