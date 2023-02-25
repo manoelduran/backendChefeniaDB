@@ -16,7 +16,7 @@ MvpsRoutes.post("/", celebrate({
         name: Joi.string().required(),
         quantity: Joi.number().required(),
         property: Joi.string().required(),
-        respawn: Joi.string().required(),
+        respawn: Joi.string().optional(),
         breed: Joi.string().required(),
         level: Joi.number().required(),
         neutral: Joi.number().required(),

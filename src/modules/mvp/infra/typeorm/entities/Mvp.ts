@@ -23,7 +23,7 @@ class Mvp {
     @Column()
     property: string;
 
-    @Column()
+    @Column({ nullable: true })
     respawn?: string;
 
     @Column()
