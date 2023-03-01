@@ -17,6 +17,9 @@ class Mvp {
     @Column()
     quantity: number;
 
+    @Column()
+    is_general?: boolean;
+
     @Column({ nullable: true })
     image?: string;
 

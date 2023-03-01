@@ -7,6 +7,7 @@ interface CreateMvpDTO {
     breed: string;
     level: number;
     neutral: number;
+    is_general?: boolean;
     water: number
     earth: number;
     fire: number;
