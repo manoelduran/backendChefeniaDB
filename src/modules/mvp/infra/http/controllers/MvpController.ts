@@ -3,6 +3,7 @@ import { CreateMvpResponse } from "@modules/mvp/responses/CreateMvpResponse";
 import { ListMvpResponse } from "@modules/mvp/responses/ListMvpResponse";
 import { CreateMvpService } from "@modules/mvp/services/CreateMvp/CreateMvpService";
 import { ListMvpsService } from "@modules/mvp/services/ListMvps/ListMvpsService";
+import { ListMvpsByIsGeneralService } from "@modules/mvp/services/ListMvpsByIsGeneral/ListMvpsByIsGeneralService";
 import { Service } from "@shared/domain/Service";
 import { BaseController } from "@shared/infra/http/BaseController";
 import { HttpResponse } from "@shared/infra/http/HttpResponse";
@@ -14,6 +15,12 @@ export class MvpController extends BaseController {
     };
     public async list(): Promise<HttpResponse> {
         const listMvpsService = container.resolve<Service<any, ListMvpResponse>>(ListMvpsService);
+        const mvps = await listMvpsService.execute();
+        return this.ok(mvps);
+    };
+
+    public async listByIsGeneral(): Promise<HttpResponse> {
+        const listMvpsService = container.resolve<Service<any, ListMvpResponse>>(ListMvpsByIsGeneralService);
         const mvps = await listMvpsService.execute();
         return this.ok(mvps);
     };

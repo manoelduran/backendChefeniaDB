@@ -1,6 +1,6 @@
 import { IMvpsRepository } from "@modules/mvp/repositories/IMvpsRepository";
 import { Mvp } from "@modules/mvp/infra/typeorm/entities/Mvp";
-import { getRepository, Repository } from "typeorm";
+import { getRepository, Not, Repository } from "typeorm";
 import { CreateMvpDTO } from "@modules/mvp/dtos/CreateMvpDTO";
 import { Either, left, right } from "@shared/either";
 import { MvpNotFoundException } from "@modules/mvp/domain/exceptions/MvpNotFoundException";
@@ -11,7 +11,15 @@ class MvpsRepository implements IMvpsRepository {
     constructor() {
         this.ormRepository = getRepository(Mvp);
     }
-   async findByIds(ids: string[]): Promise<Mvp[]> {
+    async findByGeneral(): Promise<Mvp[]> {
+        const mvps = await this.ormRepository.find({
+            where: {
+                is_general: Not(false)
+            }
+        })
+        return mvps;
+    }
+    async findByIds(ids: string[]): Promise<Mvp[]> {
         const mvps = await this.ormRepository.findByIds(ids)
         return mvps;
     }

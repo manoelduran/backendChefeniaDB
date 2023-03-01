@@ -19,6 +19,7 @@ MvpsRoutes.post("/", celebrate({
         respawn: Joi.string().optional(),
         breed: Joi.string().required(),
         level: Joi.number().required(),
+        is_general: Joi.boolean().optional(),
         neutral: Joi.number().required(),
         water: Joi.number().required(),
         earth: Joi.number().required(),
@@ -34,6 +35,8 @@ MvpsRoutes.post("/", celebrate({
     routeAdapter(mvpController, 'create'))
 
 MvpsRoutes.get("/", routeAdapter(mvpController, 'list'));
+
+MvpsRoutes.get("/general", routeAdapter(mvpController, 'listByIsGeneral'))
 
 MvpsRoutes.patch('/image/:mvp_id', upload.single('file'),  celebrate({
     [Segments.PARAMS]: {

@@ -6,7 +6,8 @@ interface IMvpsRepository {
     create(data: CreateMvpDTO): Promise<Mvp>;
     findByName(name: string): Promise<Either<MvpNotFoundException, Mvp>>;
     findById(id: string): Promise<Either<MvpNotFoundException, Mvp>>;
-    findByIds(ids: string[]): Promise<Mvp[]>
+    findByIds(ids: string[]): Promise<Mvp[]>;
+    findByGeneral(): Promise<Mvp[]>;
     list(): Promise<Mvp[]> ;
     save(mvp: Mvp): Promise<Mvp>;
 };
