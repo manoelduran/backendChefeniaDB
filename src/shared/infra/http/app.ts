@@ -8,8 +8,8 @@ import uploadConfig from '@config/upload';
 import { router } from './routes';
 import { AppError } from '@shared/errors/AppError';
 import cors from 'cors';
+import task from './tasks';
 
-createConnection();
 
 const app = express();
 app.use(express.json());
@@ -29,5 +29,9 @@ app.use((error: Error, request: Request, response: Response, next: NextFunction)
         message: `Internal server error - ${error.message}`
     })
 })
-
+const tasks = async () => {
+    await createConnection();
+    task()
+}
+tasks()
 export { app };
