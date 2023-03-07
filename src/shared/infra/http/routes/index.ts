@@ -1,4 +1,5 @@
 import { Router } from 'express';
+/* 
 import { accountRoutes } from './account.routes';
 import { authRoutes } from './auth.routes';
 import { mapRoutes } from './maps.routes';
@@ -7,10 +8,12 @@ import { notificationRoutes } from './notifications.routes';
 import { roomMvpsRoutes } from './roomMvps.routes';
 import { roomRoutes } from './rooms.routes';
 import { timerRoutes } from './timer.routes';
+*/
 
 
 
 const router = Router();
+/*
 
 router.use("/mvps", MvpsRoutes);
 router.use("/users", accountRoutes);
@@ -20,5 +23,9 @@ router.use("/maps", mapRoutes);
 router.use("/timers", timerRoutes);
 router.use('/notifications', notificationRoutes);
 router.use('/roomMvps', roomMvpsRoutes)
+*/
+router.get('/ping', (req, res) => {
+    res.send("pong")
+})
 
 export { router };

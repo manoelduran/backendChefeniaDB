@@ -32,7 +32,7 @@ interface IUploadConfig {
     getMvpImage: (mvp_image: string) => string;
 }
 
-const tmpFolder = resolve(__dirname, '..', '..', 'tmp');
+const tmpFolder = '/tmp'
 
 export default {
     driver: process.env.STORAGE_DRIVER,

@@ -3,4 +3,12 @@ ormconfig.json
 ormconfig.js
 ormconfig.Rds.js
 .env
+.build
 tmp
+
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
