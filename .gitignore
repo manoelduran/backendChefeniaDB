@@ -2,7 +2,11 @@ node_modules
 ormconfig.json
 ormconfig.js
 ormconfig.Rds.js
+serverless
 .env
+.env.dev
+.env.stg
+.env.prd
 .build
 tmp
 

@@ -25,7 +25,7 @@ router.use('/notifications', notificationRoutes);
 router.use('/roomMvps', roomMvpsRoutes)
 */
 router.get('/ping', (req, res) => {
-    res.send("pong")
+    res.send(`${process.env.DOPPLER_PROJECT}`)
 })
 
 export { router };
