@@ -41,6 +41,16 @@ functions:
           path: /{any+}
           method: any
           cors: true
+    vpc:
+      securityGroupIds:
+        - sg-0dbcefb21a13db36d
+      subnetIds:
+        - subnet-0417f254f0b949e63
+        - subnet-0417f254f0b949e63
+        - subnet-0417f254f0b949e63
+        - subnet-0417f254f0b949e63
+        - subnet-0417f254f0b949e63
+        - subnet-0417f254f0b949e63
 plugins:
   - serverless-plugin-typescript
   - serverless-tscpaths
