@@ -11,12 +11,7 @@ import { timerRoutes } from './timer.routes';
 */
 
 import { Client } from 'pg';
-const client = new Client({
-    host: process.env.AWS_RDS_HOST,
-    user: process.env.MASTER_USERNAME,
-    database: process.env.AWS_RDS_DB_NAME,
-    password: process.env.MASTER_PASSWORD,
-})
+
 
 const router = Router();
 /*
@@ -31,11 +26,30 @@ router.use('/notifications', notificationRoutes);
 router.use('/roomMvps', roomMvpsRoutes)
 */
 router.get('/ping', async (req, res) => {
+    const client = new Client({
+        host: process.env.AWS_RDS_HOST,
+        user: process.env.MASTER_USERNAME,
+        database: process.env.AWS_RDS_DB_NAME,
+        password: process.env.MASTER_PASSWORD,
+    })
     await client.connect()
 
     const res1 = await client.query('SELECT $1::text as message', ['pong!'])
     await client.end()
     res.json({ ping: res1.rows[0].message })
+})
+router.get('/tables', async (req, res) => {
+    const client = new Client({
+        host: process.env.AWS_RDS_HOST,
+        user: process.env.MASTER_USERNAME,
+        database: process.env.AWS_RDS_DB_NAME,
+        password: process.env.MASTER_PASSWORD,
+    })
+    await client.connect()
+
+    const res1 = await client.query('SELECT * FROM pg_catalog.pg_tables')
+    await client.end()
+    res.json({ tables: res1.rows })
 })
 
 export { router };

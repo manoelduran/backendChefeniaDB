@@ -1,5 +1,6 @@
 import { Connection, createConnection, getConnectionOptions } from 'typeorm';
 
+/*
 export default async (
   host = "database"
 ): Promise<Connection> => {
@@ -12,25 +13,19 @@ export default async (
     })
   )
 }
+*/
 
 
 
 
 // RDS CONNECTION //
 
-/* 
 
-import { Connection, createConnection, getConnectionOptions } from 'typeorm';
+
+//import { Connection, createConnection, getConnectionOptions } from 'typeorm';
 
 export default async (
-   host = process.env.AWS_RDS_HOST //"database"//
 ): Promise<Connection> => {
-  const defaultOptions = await getConnectionOptions();
 
-  return createConnection(
-    Object.assign(defaultOptions, {
-      host: host,
-      database: defaultOptions.database,
-    })
-  )
-} */
+  return createConnection()
+} 

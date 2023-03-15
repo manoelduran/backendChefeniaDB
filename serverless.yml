@@ -1,15 +1,5 @@
-# Welcome to serverless. Read the docs
-# https://serverless.com/framework/docs/
-
-# Serverless.yml is the configuration the CLI
-# uses to deploy your code to your provider of choice
-
-# The `service` block is the name of the service
 service: backendchefeniadb
-
 frameworkVersion: '3'
-
-# The `provider` block defines where your service will be deployed
 provider:
   name: aws
   environment:
@@ -30,17 +20,26 @@ provider:
     STORAGE_DRIVER: ${.env:STORAGE_DRIVER}
     UPLOAD_BUCKET: ${.env:UPLOAD_BUCKET}
   runtime: nodejs16.x
-
-# The `functions` block defines what code to deploy
 functions:
   chefenia:
-    handler: handler.lambda
-    # The `events` block defines how to trigger the handler.helloWorld code
+    handler: server.handler
     events:
       - http:
           path: /{any+}
           method: any
           cors: true
+    vpc:
+      securityGroupIds:
+        - sg-0dbcefb21a13db36d
+      subnetIds:
+        - subnet-0417f254f0b949e63
+        - subnet-0417f254f0b949e63
+        - subnet-0417f254f0b949e63
+        - subnet-0417f254f0b949e63
+        - subnet-0417f254f0b949e63
+        - subnet-0417f254f0b949e63
+  migration:
+    handler: migration.handler
     vpc:
       securityGroupIds:
         - sg-0dbcefb21a13db36d
