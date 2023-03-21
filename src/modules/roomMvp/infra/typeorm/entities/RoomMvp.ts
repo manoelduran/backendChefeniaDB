@@ -9,7 +9,7 @@ class RoomMvp {
 
     @Column({ type: 'uuid', nullable: false })
     mvp_id: string;
-    @Column({ type: 'uuid', nullable: false, })
+    @Column({ type: 'uuid', nullable: false })
     room_id: string;
     @CreateDateColumn({ type: 'timestamp' })
     created_at: Date;
