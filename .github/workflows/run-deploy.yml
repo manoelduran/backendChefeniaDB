@@ -16,6 +16,10 @@ jobs:
           node-version: 16
       - name: Install Dependencies
         run: yarn install
+      - name: Run Doppler
+        run:  yarn doppler
+        env:
+          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
       - name: Run Deploy
         run: yarn deploy
         env:
