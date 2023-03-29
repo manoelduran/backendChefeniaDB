@@ -6,11 +6,11 @@
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn  src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
-    "deploy": "serverless deploy",
+    "deploy": "npx serverless deploy",
     "tsc": "tsc --noEmit",
-    "remove": "serverless remove",
-    "refresh": "serverless invoke --function refresh",
-    "migrate": "serverless invoke --function migration",
+    "remove": "npx serverless remove",
+    "refresh": "npx serverless invoke --function refresh",
+    "migrate": "npx serverless invoke --function migration",
     "test": "NODE_ENV=test jest"
   },
   "dependencies": {
@@ -46,6 +46,7 @@
     "@types/pg": "^8.6.6",
     "@types/uuid": "^8.3.4",
     "jest": "^29.0.3",
+    "serverless": "^3.29.0",
     "serverless-dotenv-plugin": "^4.0.2",
     "serverless-plugin-typescript": "^2.1.4",
     "serverless-tscpaths": "^0.0.8",
