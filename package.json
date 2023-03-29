@@ -7,6 +7,7 @@
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn  src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "deploy": "serverless deploy",
+    "tsc": "tsc --noEmit",
     "remove": "serverless remove",
     "refresh": "serverless invoke --function refresh",
     "migrate": "serverless invoke --function migration",
