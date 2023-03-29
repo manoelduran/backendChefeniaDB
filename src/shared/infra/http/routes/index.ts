@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { roomRoutes } from './rooms.routes';
-/* 
+
 import { accountRoutes } from './account.routes';
 import { authRoutes } from './auth.routes';
 import { mapRoutes } from './maps.routes';
@@ -9,13 +9,13 @@ import { notificationRoutes } from './notifications.routes';
 import { roomMvpsRoutes } from './roomMvps.routes';
 
 import { timerRoutes } from './timer.routes';
-*/
+
 
 import { Client } from 'pg';
 
 
 const router = Router();
-/*
+
 
 router.use("/mvps", MvpsRoutes);
 router.use("/users", accountRoutes);
@@ -25,8 +25,8 @@ router.use("/maps", mapRoutes);
 router.use("/timers", timerRoutes);
 router.use('/notifications', notificationRoutes);
 router.use('/roomMvps', roomMvpsRoutes)
-*/
-//router.use("/rooms", roomRoutes);
+
+router.use("/rooms", roomRoutes);
 router.get('/ping', async (req, res) => {
     const client = new Client({
         host: process.env.AWS_RDS_HOST,

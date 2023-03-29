@@ -6,6 +6,10 @@
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn  src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
+    "deploy": "serverless deploy",
+    "remove": "serverless remove",
+    "refresh": "serverless invoke --function refresh",
+    "migrate": "serverless invoke --function migration",
     "test": " NODE_ENV=test jest --watchAll --detectOpenHandles"
   },
   "dependencies": {
