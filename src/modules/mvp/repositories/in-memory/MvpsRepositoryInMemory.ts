@@ -12,9 +12,7 @@ class MvpsRepositoryInMemory implements IMvpsRepository {
     constructor() {
         this.mvps = [];
     }
-    findByGeneral(): Promise<Mvp[]> {
-        throw new Error('Method not implemented.');
-    }
+
     async findByIds(ids: string[]): Promise<Mvp[]> {
         const mvps = this.mvps.filter(mvp => ids.includes(mvp.id))
         return mvps
