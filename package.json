@@ -11,7 +11,7 @@
     "remove": "serverless remove",
     "refresh": "serverless invoke --function refresh",
     "migrate": "serverless invoke --function migration",
-    "test": " NODE_ENV=test jest --watchAll --detectOpenHandles"
+    "test": "NODE_ENV=test jest"
   },
   "dependencies": {
     "@vendia/serverless-express": "^4.10.1",
