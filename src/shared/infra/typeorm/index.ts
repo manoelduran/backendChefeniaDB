@@ -33,7 +33,7 @@ export default async function initializeTypeORM(options?: Partial<ConnectionOpti
     "username": process.env.MASTER_USERNAME,
     "password": process.env.MASTER_PASSWORD,
     "database": process.env.AWS_RDS_DB_NAME,
-    "synchronize": true,
+    "synchronize": false,
     "migrations": ["./src/shared/infra/typeorm/migrations/*.{ts,js}"],
     "entities": ["./src/modules/**/infra/typeorm/entities/*.{ts,js}"],
     "cli": {
