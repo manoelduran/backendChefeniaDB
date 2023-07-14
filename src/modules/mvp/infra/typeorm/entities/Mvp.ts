@@ -1,8 +1,9 @@
 import { v4 as uuidV4 } from 'uuid';
-import { Column, Entity, OneToOne, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, OneToOne, PrimaryColumn } from 'typeorm';
 import { Timer } from '@modules/timer/infra/typeorm/entities/Timer';
 import { Expose } from 'class-transformer';
 import uploadConfig from '@config/upload';
+import { Room } from '@modules/room/infra/typeorm/entities/Room';
 @Entity("mvps")
 class Mvp {
     @PrimaryColumn({ type: 'uuid' })
@@ -13,7 +14,15 @@ class Mvp {
 
     @OneToOne(() => Timer, (timer) => timer.mvp)
     timer: Timer;
-
+    @ManyToMany(() => Room, room => room.mvps)
+    @JoinTable({
+        name: 'roommvps',
+        joinColumn: {
+          name: 'mvp_id',
+          referencedColumnName: 'id',
+        }
+      })
+      rooms?: Room[]
     @Column()
     quantity: number;
 
@@ -26,7 +35,7 @@ class Mvp {
     @Column()
     property: string;
 
-    @Column({ nullable: true })
+    @Column()
     respawn?: string;
 
     @Column()

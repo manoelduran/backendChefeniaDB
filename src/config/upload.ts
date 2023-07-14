@@ -32,7 +32,7 @@ interface IUploadConfig {
     getMvpImage: (mvp_image: string) => string;
 }
 
-const tmpFolder = resolve(__dirname, '..', '..', 'tmp');
+const tmpFolder = '/tmp'
 
 export default {
     driver: process.env.STORAGE_DRIVER,
@@ -116,8 +116,8 @@ export default {
         disk: {},
         aws: {
             bucket: process.env.UPLOAD_BUCKET,
-            region: process.env.AWS_REGION,
-            uri: `https://${process.env.UPLOAD_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com`,
+            region: 'us-east-1',
+            uri: `https://${process.env.UPLOAD_BUCKET}.s3.us-east-1.amazonaws.com`,
             credentials: {
                 accessKeyId: process.env.S3_ACCESS_KEY_ID,
                 secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
