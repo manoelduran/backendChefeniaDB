@@ -26,5 +26,6 @@ roomMvpsRoutes.get("/:room_id",
     },
   }),
   routeAdapter(roomMvpController, 'listByRoomId'))
+  roomMvpsRoutes.get("/automate", routeAdapter(roomMvpController, 'automate'))
 
 export { roomMvpsRoutes }

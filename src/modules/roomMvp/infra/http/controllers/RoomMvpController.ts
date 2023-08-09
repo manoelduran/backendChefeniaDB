@@ -3,6 +3,7 @@ import { ListRoomMvpByRoomIdDTO } from "@modules/roomMvp/dtos/ListRoomMvpByRoomI
 import { CreateRoomMvpResponse } from "@modules/roomMvp/responses/CreateRoomMvpResponse";
 import { ListRoomMvpsByRoomIdResponse } from "@modules/roomMvp/responses/ListRoomMvpsByRoomIdResponse";
 import { ListRoomMvpsResponse } from "@modules/roomMvp/responses/ListRoomMvpsResponse";
+import AutomateGeneralMvpInRoomMvp from "@modules/roomMvp/services/AutomateGeneralMvpInRoomMvp/AutomateGeneralMvpInRoomMvp";
 import { CreateRoomMvpService } from "@modules/roomMvp/services/CreateRoomMvp/CreateRomMvpService";
 import { ListMvpsByRoomIdService } from "@modules/roomMvp/services/ListMvpsByRoomId/ListMvpsByRoomIdService";
 import { ListRoomMvpsService } from "@modules/roomMvp/services/ListRoomMvps/ListRoomMvpsService";
@@ -40,6 +41,11 @@ class RoomMvpController extends BaseController {
             return this.getError(roomMvpsOrError.value);
         }
         return this.ok(roomMvpsOrError.value);
+    };
+    async automate(): Promise<HttpResponse> {
+        const automateGeneralMvpInRoomMvp = container.resolve<Service<any, void>>(AutomateGeneralMvpInRoomMvp);
+        await automateGeneralMvpInRoomMvp.execute();
+        return this.noContent();
     };
 };
 

@@ -21,7 +21,7 @@ class RoomMvp {
     @CreateDateColumn({ type: 'timestamp' })
     created_at: Date;
     @UpdateDateColumn({ type: 'timestamp' })
-    updated_at: Date;
+    updated_at?: Date;
     constructor() {
         if (!this.id) {
             this.id = uuidV4();
